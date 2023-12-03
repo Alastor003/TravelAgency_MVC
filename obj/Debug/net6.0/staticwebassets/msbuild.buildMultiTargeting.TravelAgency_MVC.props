@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\TravelAgency_MVC.props" />
+</Project>

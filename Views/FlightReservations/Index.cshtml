@@ -1,0 +1,53 @@
+﻿@model IEnumerable<TravelAgency_MVC.Models.FlightReservation>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.myFlight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.myUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.amountPaid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sites)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.myFlight.aircraft)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.myUser.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.amountPaid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sites)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
