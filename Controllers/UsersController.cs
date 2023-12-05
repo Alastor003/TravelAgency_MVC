@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,10 +13,12 @@ namespace TravelAgency_MVC.Controllers
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UsersController(ApplicationDbContext context)
+        public UsersController(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         // GET: Users
@@ -157,6 +160,31 @@ namespace TravelAgency_MVC.Controllers
         private bool UserExists(int id)
         {
           return (_context.users?.Any(e => e.idUser == id)).GetValueOrDefault();
+        }
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(string txtEmail, string txtPassword)
+        {
+            // Verificar las credenciales del usuario
+            var user = _context.users.SingleOrDefault(u => u.email == txtEmail && u.password == txtPassword);
+
+            if (user != null)
+            {
+                HttpContext.Session.SetString("UsuarioAutenticado", user.name);
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewBag.Error = "Credenciales incorrectas";
+                return View();
+            }
         }
     }
 }
