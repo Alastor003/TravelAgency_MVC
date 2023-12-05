@@ -48,6 +48,7 @@ namespace TravelAgency_MVC
                 pattern: "{controller=Users}/{action=login}/{id?}");
 
             app.UseSession();
+            app.UseAuthentication();
 
             app.Run();
         }

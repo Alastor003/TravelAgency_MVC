@@ -177,6 +177,8 @@ namespace TravelAgency_MVC.Controllers
             if (user != null)
             {
                 HttpContext.Session.SetString("UsuarioAutenticado", user.name);
+                HttpContext.Session.SetString("isAdmin", user.isAdmin.ToString());
+
 
                 return RedirectToAction("Index", "Home");
             }
@@ -185,6 +187,14 @@ namespace TravelAgency_MVC.Controllers
                 ViewBag.Error = "Credenciales incorrectas";
                 return View();
             }
+        }
+
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Login", "Users");
         }
     }
 }
