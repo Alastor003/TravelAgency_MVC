@@ -205,9 +205,9 @@ namespace TravelAgency_MVC.Controllers
                 if (existingUser != null)
                 {
                     ViewBag.Error = "El usuario ya existe.";
-                    return View(); 
+                    return View();
                 }
-                               
+
                 var newUser = new User
                 {
                     name = txtNombre,
@@ -215,23 +215,28 @@ namespace TravelAgency_MVC.Controllers
                     dni = txtDNI,
                     email = txtEmail,
                     password = txtPassword,
-                    
                 };
 
-                      
-        _context.users.Add(newUser);
+                _context.users.Add(newUser);
                 _context.SaveChanges();
 
-                HttpContext.Session.SetString("UsuarioAutenticado", newUser.name);
-                              
-                return RedirectToAction("Index", "Home");
+                // Redirigir a la página de inicio de sesión sin establecer la sesión del usuario autenticado
+                return RedirectToAction("Login", "Users");
             }
             catch (Exception ex)
-            {               
+            {
                 ViewBag.Error = "Ocurrió un error durante el registro.";
                 return View();
             }
         }
+
+
+
+        public ActionResult Volver()
+        {
+            return RedirectToAction("Login", "Users");
+        }
+
 
 
         [HttpPost]
