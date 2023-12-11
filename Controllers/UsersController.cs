@@ -195,6 +195,46 @@ namespace TravelAgency_MVC.Controllers
         }
 
         [HttpPost]
+        public ActionResult ProcesarRegistro(string txtNombre, string txtApellido, int txtDNI, string txtEmail, string txtPassword)
+        {
+            try
+            {
+                // Verificar si el usuario ya existe en la base de datos
+                var existingUser = _context.users.SingleOrDefault(u => u.email == txtEmail);
+
+                if (existingUser != null)
+                {
+                    ViewBag.Error = "El usuario ya existe.";
+                    return View(); 
+                }
+                               
+                var newUser = new User
+                {
+                    name = txtNombre,
+                    surname = txtApellido,
+                    dni = txtDNI,
+                    email = txtEmail,
+                    password = txtPassword,
+                    
+                };
+
+                      
+        _context.users.Add(newUser);
+                _context.SaveChanges();
+
+                HttpContext.Session.SetString("UsuarioAutenticado", newUser.name);
+                              
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {               
+                ViewBag.Error = "Ocurrió un error durante el registro.";
+                return View();
+            }
+        }
+
+
+        [HttpPost]
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
