@@ -9,201 +9,205 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TravelAgency_MVC
 build_property.RootNamespace = TravelAgency_MVC
-build_property.ProjectDir = C:\Users\Brian\Documents\c# projects\TravelAgency_MVC\
+build_property.ProjectDir = C:\Users\fdcar\Source\Repos\TravelAgency_MVC\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Brian\Documents\c# projects\TravelAgency_MVC
+build_property.MSBuildProjectDirectory = C:\Users\fdcar\Source\Repos\TravelAgency_MVC
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Cities/Create.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Cities/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2l0aWVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Cities/Delete.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Cities/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2l0aWVzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Cities/Details.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Cities/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2l0aWVzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Cities/Edit.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Cities/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2l0aWVzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Cities/Index.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Cities/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2l0aWVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/FlightReservations/Create.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/FlightReservations/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0UmVzZXJ2YXRpb25zXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/FlightReservations/Delete.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/FlightReservations/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0UmVzZXJ2YXRpb25zXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/FlightReservations/Details.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/FlightReservations/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0UmVzZXJ2YXRpb25zXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/FlightReservations/Edit.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/FlightReservations/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0UmVzZXJ2YXRpb25zXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/FlightReservations/Index.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/FlightReservations/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0UmVzZXJ2YXRpb25zXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Flights/Create.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Flights/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0c1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Flights/Delete.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Flights/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0c1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Flights/Details.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Flights/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0c1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Flights/Edit.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Flights/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0c1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Flights/Index.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Flights/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0c1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Home/Index.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Home/Privacy.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/HotelReservations/Create.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/HotelReservations/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG90ZWxSZXNlcnZhdGlvbnNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/HotelReservations/Delete.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/HotelReservations/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG90ZWxSZXNlcnZhdGlvbnNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/HotelReservations/Details.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/HotelReservations/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG90ZWxSZXNlcnZhdGlvbnNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/HotelReservations/Edit.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/HotelReservations/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG90ZWxSZXNlcnZhdGlvbnNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/HotelReservations/Index.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/HotelReservations/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG90ZWxSZXNlcnZhdGlvbnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Hotels/Create.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Hotels/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG90ZWxzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Hotels/Delete.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Hotels/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG90ZWxzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Hotels/Details.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Hotels/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG90ZWxzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Hotels/Edit.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Hotels/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG90ZWxzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Hotels/Index.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Hotels/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG90ZWxzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Shared/Error.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/UsersFlights/Create.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/UsersFlights/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNGbGlnaHRzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/UsersFlights/Delete.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/UsersFlights/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNGbGlnaHRzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/UsersFlights/Details.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/UsersFlights/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNGbGlnaHRzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/UsersFlights/Edit.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/UsersFlights/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNGbGlnaHRzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/UsersFlights/Index.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/UsersFlights/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNGbGlnaHRzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/UsersHotels/Create.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/UsersHotels/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNIb3RlbHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/UsersHotels/Delete.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/UsersHotels/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNIb3RlbHNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/UsersHotels/Details.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/UsersHotels/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNIb3RlbHNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/UsersHotels/Edit.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/UsersHotels/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNIb3RlbHNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/UsersHotels/Index.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/UsersHotels/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNIb3RlbHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Users/Create.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Users/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Users/Delete.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Users/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Users/Details.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Users/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Users/Edit.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Users/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Users/Index.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Users/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Users/login.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Users/login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcbG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/_ViewImports.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Users/Registro.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcUmVnaXN0cm8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/_ViewStart.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/Shared/_Layout.cshtml]
+[C:/Users/fdcar/Source/Repos/TravelAgency_MVC/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-iqfibdi6uh
