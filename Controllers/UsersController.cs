@@ -168,6 +168,11 @@ namespace TravelAgency_MVC.Controllers
             return View();
         }
 
+        public ActionResult Registro()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Login(string txtEmail, string txtPassword)
         {
