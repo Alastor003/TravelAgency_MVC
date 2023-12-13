@@ -183,6 +183,8 @@ namespace TravelAgency_MVC.Controllers
             {
                 HttpContext.Session.SetString("UsuarioAutenticado", user.name);
                 HttpContext.Session.SetString("isAdmin", user.isAdmin.ToString());
+                HttpContext.Session.SetString("Id", user.idUser.ToString());
+
 
 
                 return RedirectToAction("Index", "Home");
@@ -245,6 +247,23 @@ namespace TravelAgency_MVC.Controllers
             HttpContext.Session.Clear();
 
             return RedirectToAction("Login", "Users");
+        }
+        public async Task<IActionResult> Profile()
+        {
+
+            // Obtener el nombre del usuario autenticado desde la sesión
+            var authenticatedUserName = HttpContext.Session.GetString("Id");
+
+            // Obtener el usuario actual desde la base de datos
+            var currentUser = await _context.users.SingleOrDefaultAsync(u => u.idUser.ToString() == authenticatedUserName);
+
+            if (currentUser == null)
+            {
+                // Manejar el caso en que no se encuentra el usuario
+                return NotFound();
+            }
+
+            return View(currentUser);
         }
     }
 }

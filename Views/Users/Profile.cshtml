@@ -1,0 +1,93 @@
+﻿@model TravelAgency_MVC.Models.User
+@{
+    ViewData["Title"] = "Profile";
+}
+<h2>@ViewData["Title"].</h2>
+<h3>@ViewData["Message"]</h3>
+
+<h2>User Profile</h2>
+
+<div class="container">
+    <div class="row">
+
+<div class="col-sm-6">
+    <p><strong>DNI:</strong> @Model.dni</p>
+    <p><strong>Name:</strong> @Model.name</p>
+    <p><strong>Surname:</strong> @Model.surname</p>
+    <p><strong>Email:</strong> @Model.email</p>
+    <p><strong>Credit:</strong> @Model.credit</p>
+</div>
+
+        <div class="col-sm-6">
+    <input type="number" class="form-control my-3" placeholder="Ingrese monto de carga de credito" />
+
+    <button class="btn btn-success p-2 btn-lg"><i class="fa-regular fa-dollar-sign"></i>Cargar</button>
+    
+</div>
+    </div>
+
+
+</div>
+
+
+<div class="container">
+    <div class="row">
+
+    <div class="col-sm-6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Vuelos</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Cant.Asientos</th>
+                    <th scope="col">Monto Pago</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
+
+                </tr>
+            </thead>
+            <tbody>                                      
+                <tr>
+                    <td>Brasil</td>
+                    <td>Rodrigo</td>
+                    <td>3</td>
+                    <td>120.000</td>
+                    <td><a href="#">Edit</a></td>
+                    <td><a href="#">Eliminar</a></td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+        <div class="col-sm-6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Hoteles</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Cant.Lugares</th>
+                    <th scope="col">Monto Pago</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mundial</td>
+                    <td>Rodrigo</td>
+                    <td>4</td>
+                    <td>130.000</td>
+                    <td><a href="#">Edit</a></td>
+                    <td><a href="#">Eliminar</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    </div>
+    
+</div>
+
+        
