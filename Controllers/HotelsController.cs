@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TravelAgency_MVC.Models;
+using static TravelAgency_MVC.Controllers.UsersController;
 
 namespace TravelAgency_MVC.Controllers
 {
@@ -19,6 +20,7 @@ namespace TravelAgency_MVC.Controllers
         }
 
         // GET: Hotels
+        [TypeFilter(typeof(CustomAuthorizationFilter))]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.hotel.Include(h => h.Location);
@@ -26,6 +28,7 @@ namespace TravelAgency_MVC.Controllers
         }
 
         // GET: Hotels/Details/5
+        [TypeFilter(typeof(CustomAuthorizationFilter))]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.hotel == null)
@@ -45,6 +48,7 @@ namespace TravelAgency_MVC.Controllers
         }
 
         // GET: Hotels/Create
+        [TypeFilter(typeof(CustomAuthorizationFilter))]
         public IActionResult Create()
         {
             ViewData["locationId"] = new SelectList(_context.cities, "id", "id");
@@ -69,6 +73,7 @@ namespace TravelAgency_MVC.Controllers
         }
 
         // GET: Hotels/Edit/5
+        [TypeFilter(typeof(CustomAuthorizationFilter))]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.hotel == null)

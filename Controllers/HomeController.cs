@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using TravelAgency_MVC.Models;
+using static TravelAgency_MVC.Controllers.UsersController;
 
 namespace TravelAgency_MVC.Controllers
 {
@@ -12,12 +13,12 @@ namespace TravelAgency_MVC.Controllers
         {
             _logger = logger;
         }
-
+        [TypeFilter(typeof(CustomAuthorizationFilter))]
         public IActionResult Index()
         {
             return View();
         }
-
+        [TypeFilter(typeof(CustomAuthorizationFilter))]
         public IActionResult Privacy()
         {
             return View();

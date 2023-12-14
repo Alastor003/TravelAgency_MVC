@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TravelAgency_MVC.Models;
@@ -21,7 +22,21 @@ namespace TravelAgency_MVC.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
+        public class CustomAuthorizationFilter : IAuthorizationFilter
+        {
+            public void OnAuthorization(AuthorizationFilterContext context)
+            {
+                var authenticatedUserName = context.HttpContext.Session.GetString("Id");
+
+                if (string.IsNullOrEmpty(authenticatedUserName))
+                {
+                    context.Result = new RedirectToActionResult("Login", "Users", null);
+                }
+            }
+        }
+
         // GET: Users
+        [TypeFilter(typeof(CustomAuthorizationFilter))]
         public async Task<IActionResult> Index()
         {
               return _context.users != null ? 
@@ -30,6 +45,7 @@ namespace TravelAgency_MVC.Controllers
         }
 
         // GET: Users/Details/5
+        [TypeFilter(typeof(CustomAuthorizationFilter))]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.users == null)
@@ -48,6 +64,7 @@ namespace TravelAgency_MVC.Controllers
         }
 
         // GET: Users/Create
+        [TypeFilter(typeof(CustomAuthorizationFilter))]
         public IActionResult Create()
         {
             return View();
@@ -259,7 +276,7 @@ namespace TravelAgency_MVC.Controllers
             if (currentUser == null)
             {
                 // Manejar el caso en que no se encuentra el usuario
-                return NotFound();
+                return RedirectToAction("Login", "Users");
             }
 
             return View(currentUser);
