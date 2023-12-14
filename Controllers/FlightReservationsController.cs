@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TravelAgency_MVC.Models;
+using static TravelAgency_MVC.Controllers.UsersController;
 
 namespace TravelAgency_MVC.Controllers
 {
@@ -19,6 +20,7 @@ namespace TravelAgency_MVC.Controllers
         }
 
         // GET: FlightReservations
+        [TypeFilter(typeof(CustomAuthorizationFilter))]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.flightsReservation.Include(f => f.myFlight).Include(f => f.myUser);
@@ -26,6 +28,7 @@ namespace TravelAgency_MVC.Controllers
         }
 
         // GET: FlightReservations/Details/5
+        [TypeFilter(typeof(CustomAuthorizationFilter))]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.flightsReservation == null)
@@ -46,6 +49,7 @@ namespace TravelAgency_MVC.Controllers
         }
 
         // GET: FlightReservations/Create
+        [TypeFilter(typeof(CustomAuthorizationFilter))]
         public IActionResult Create()
         {
             ViewData["myFlightId"] = new SelectList(_context.flights, "id", "aircraft");
@@ -72,6 +76,7 @@ namespace TravelAgency_MVC.Controllers
         }
 
         // GET: FlightReservations/Edit/5
+        [TypeFilter(typeof(CustomAuthorizationFilter))]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.flightsReservation == null)
