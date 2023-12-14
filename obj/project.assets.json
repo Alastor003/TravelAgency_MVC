@@ -11510,19 +11510,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\rodri\\.nuget\\packages\\": {}
+    "C:\\Users\\fdcar\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Facultad\\MVC\\TravelAgency_MVC\\TravelAgency_MVC.csproj",
+      "projectUniqueName": "C:\\Users\\fdcar\\Source\\Repos\\TravelAgency_MVC\\TravelAgency_MVC.csproj",
       "projectName": "TravelAgency_MVC",
-      "projectPath": "D:\\Facultad\\MVC\\TravelAgency_MVC\\TravelAgency_MVC.csproj",
-      "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
-      "outputPath": "D:\\Facultad\\MVC\\TravelAgency_MVC\\obj\\",
+      "projectPath": "C:\\Users\\fdcar\\Source\\Repos\\TravelAgency_MVC\\TravelAgency_MVC.csproj",
+      "packagesPath": "C:\\Users\\fdcar\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\fdcar\\Source\\Repos\\TravelAgency_MVC\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\rodri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\fdcar\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11594,7 +11594,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

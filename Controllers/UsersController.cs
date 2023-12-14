@@ -195,7 +195,6 @@ namespace TravelAgency_MVC.Controllers
                 return View();
             }
         }
-
         [HttpPost]
         public ActionResult ProcesarRegistro(string txtNombre, string txtApellido, int txtDNI, string txtEmail, string txtPassword)
         {
@@ -206,8 +205,8 @@ namespace TravelAgency_MVC.Controllers
 
                 if (existingUser != null)
                 {
-                    ViewBag.Error = "El usuario ya existe.";
-                    return View();
+                    ModelState.AddModelError("txtEmail", "El email ya está registrado.");
+                    return View("Registro");  
                 }
 
                 var newUser = new User
