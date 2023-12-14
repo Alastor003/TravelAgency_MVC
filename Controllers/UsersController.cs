@@ -183,6 +183,7 @@ namespace TravelAgency_MVC.Controllers
             {
                 HttpContext.Session.SetString("UsuarioAutenticado", user.name);
                 HttpContext.Session.SetString("isAdmin", user.isAdmin.ToString());
+                HttpContext.Session.SetInt32("idUser", user.idUser);
 
 
                 return RedirectToAction("Index", "Home");

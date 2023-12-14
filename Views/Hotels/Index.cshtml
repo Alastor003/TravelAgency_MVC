@@ -1,53 +1,97 @@
-﻿@model IEnumerable<TravelAgency_MVC.Models.Hotel>
+﻿@inject IHttpContextAccessor HttpContextAccessor
+@model IEnumerable<TravelAgency_MVC.Models.Hotel>
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
+    @if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("UsuarioAutenticado")))
+{
+    var isAdmin = HttpContextAccessor.HttpContext.Session.GetString("isAdmin");
+    var isAdminBool = !string.IsNullOrEmpty(isAdmin) && bool.Parse(isAdmin);
+    @if (isAdminBool)
+    {
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            <p>@TempData["ErrorMessage"]</p>
+        </div>
+    }else if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">
+            <p>@TempData["Message"]</p>
+        </div>
+    } 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Location)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Capacity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                @if (!isAdminBool)
+                {
+                    <th>Fecha de entrada</th>
+                    <th>Fecha de salida</th>
+                }
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location.id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Capacity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    @if (isAdminBool)
+                    {
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <form asp-controller="Hotels" asp-action="Reserve" method="post">
+                        <td><input type="date" name="dSince" asp-format="{0:yyyy-MM-dd}" /></td>
+                        <td><input type="date" name="dUntil" asp-format="{0:yyyy-MM-dd}" /></td>
+                        <td>
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="idHotel" value="@item.Id" />
+                                <input type="hidden" name="idUser" value="@HttpContextAccessor.HttpContext.Session.GetInt32("idUser")" />
+                                <label for="sites">Asientos:</label>
+                                <input type="number" name="people" value="1" min="1" max="10" />
+                                <button type="submit">Reservar Hotel</button>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Location)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Capacity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location.id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Capacity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+                        </td>
+                            </form>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
 }
-    </tbody>
-</table>
