@@ -62,7 +62,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Where(f => !f.passengers.Any(p => p.idUser == HttpContextAccessor.HttpContext.Session.GetInt32("Id"))))
+            @foreach (var item in Model.Where(f => !f.passengers.Any(p => p.idUser == int.Parse(HttpContextAccessor.HttpContext.Session.GetString("Id")))))
             {
                 <tr>
                     <td>
@@ -104,7 +104,7 @@
                             <form asp-controller="Flights" asp-action="Reserve" method="post">
                                 @Html.AntiForgeryToken()
                                 <input type="hidden" name="idFlight" value="@item.id" />
-                                <input type="hidden" name="idUser" value="@HttpContextAccessor.HttpContext.Session.GetInt32("Id")" />
+                                <input type="hidden" name="idUser" value="@HttpContextAccessor.HttpContext.Session.GetString("Id")" />
                                 <label for="sites">Asientos:</label>
                                 <input type="number" name="sites" value="1" min="1" max="10" />
                                 <button type="submit">Reservar Vuelo</button>
@@ -113,7 +113,7 @@
                     }
                 </tr>
             }
-            @if (Model.Where(f => !f.passengers.Any(p => p.idUser == HttpContextAccessor.HttpContext.Session.GetInt32("Id"))).Count() == 0)
+            @if (Model.Where(f => !f.passengers.Any(p => p.idUser == int.Parse(HttpContextAccessor.HttpContext.Session.GetString("Id")))).Count() == 0)
             {
                 <tr>
                     <td colspan="9" class="text-center">No existen vuelos disponibles</td>

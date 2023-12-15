@@ -177,11 +177,12 @@ namespace TravelAgency_MVC.Controllers
 
         [HttpPost, ActionName("Reserve")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Reserve(int idUser, int idFlight, int sites)
+        public async Task<IActionResult> Reserve(string idUser, int idFlight, int sites)
         {
+            int id = int.Parse(idUser);
             var flight = await _context.flights.FindAsync(idFlight);
-            User user = await _context.users.FindAsync(idUser);
-            FlightReservation fr = _context.flightsReservation.FirstOrDefault(f => f.myFlightId == idFlight && f.myUserId == idUser);
+            User user = await _context.users.FindAsync(id);
+            FlightReservation fr = _context.flightsReservation.FirstOrDefault(f => f.myFlightId == idFlight && f.myUserId == id);
 
             if (flight == null && user == null)
             {

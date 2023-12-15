@@ -166,9 +166,10 @@ namespace TravelAgency_MVC.Controllers
 
         [HttpPost, ActionName("Reserve")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Reserve(int idUser, int idHotel, int people, DateTime dSince, DateTime dUntil)
+        public async Task<IActionResult> Reserve(string idUser, int idHotel, int people, DateTime dSince, DateTime dUntil)
         {
-            User user = await _context.users.FindAsync(idUser);
+            int id = int.Parse(idUser);
+            User user = await _context.users.FindAsync(id);
             Hotel hotel = await _context.hotel.FindAsync(idHotel);
 
             if (user == null || hotel == null)
@@ -197,7 +198,7 @@ namespace TravelAgency_MVC.Controllers
 
                     HotelReservation hotelRes = new HotelReservation(hotel, user, dSince, dUntil, totalCost);
 
-                    var existe = _context.usersHotels.FirstOrDefault(u => u.idHotel == idHotel && u.idUser == idUser);
+                    var existe = _context.usersHotels.FirstOrDefault(u => u.idHotel == idHotel && u.idUser == id);
 
                     if (existe != null)
                     {
