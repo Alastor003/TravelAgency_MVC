@@ -1,77 +1,128 @@
-﻿@model IEnumerable<TravelAgency_MVC.Models.Flight>
+﻿@inject IHttpContextAccessor HttpContextAccessor
+@model IEnumerable<TravelAgency_MVC.Models.Flight>
+
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.origin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.destination)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.soldFlights)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.capacity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.flightPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.airline)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.aircraft)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.origin.id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.destination.id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.soldFlights)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.capacity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.flightPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.airline)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.aircraft)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
-            </td>
-        </tr>
+
+<h1>Index</h1>
+@if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("UsuarioAutenticado")))
+{
+    var isAdmin = HttpContextAccessor.HttpContext.Session.GetString("isAdmin");
+    var isAdminBool = !string.IsNullOrEmpty(isAdmin) && bool.Parse(isAdmin);
+    @if (isAdminBool)
+    {
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            <p>@TempData["ErrorMessage"]</p>
+        </div>
+    }
+    else if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">
+            <p>@TempData["Message"]</p>
+        </div>
+    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.origin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.destination)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.soldFlights)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.capacity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.flightPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.airline)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.aircraft)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Where(f => !f.passengers.Any(p => p.idUser == int.Parse(HttpContextAccessor.HttpContext.Session.GetString("Id")))))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.origin.cityName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.destination.cityName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.soldFlights)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.capacity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.flightPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.airline)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.aircraft)
+                    </td>
+                    @if (isAdminBool)
+                    {
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                        </td>
+                    }
+                    else
+                    {
+
+                        <td>
+                            <form asp-controller="Flights" asp-action="Reserve" method="post">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="idFlight" value="@item.id" />
+                                <input type="hidden" name="idUser" value="@HttpContextAccessor.HttpContext.Session.GetString("Id")" />
+                                <label for="sites">Asientos:</label>
+                                <input type="number" name="sites" value="1" min="1" max="10" />
+                                <button type="submit">Reservar Vuelo</button>
+                            </form>
+                        </td>
+                    }
+                </tr>
+            }
+            @if (Model.Where(f => !f.passengers.Any(p => p.idUser == int.Parse(HttpContextAccessor.HttpContext.Session.GetString("Id")))).Count() == 0)
+            {
+                <tr>
+                    <td colspan="9" class="text-center">No existen vuelos disponibles</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
-    </tbody>
-</table>
+
+
+
+

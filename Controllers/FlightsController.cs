@@ -23,7 +23,7 @@ namespace TravelAgency_MVC.Controllers
         [TypeFilter(typeof(CustomAuthorizationFilter))]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.flights.Include(f => f.destination).Include(f => f.origin);
+            var applicationDbContext = _context.flights.Include(f => f.destination).Include(f => f.origin).Include(f => f.passengers);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -174,5 +174,52 @@ namespace TravelAgency_MVC.Controllers
         {
           return (_context.flights?.Any(e => e.id == id)).GetValueOrDefault();
         }
-    }
+
+        [HttpPost, ActionName("Reserve")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Reserve(string idUser, int idFlight, int sites)
+        {
+            int id = int.Parse(idUser);
+            var flight = await _context.flights.FindAsync(idFlight);
+            User user = await _context.users.FindAsync(id);
+            FlightReservation fr = _context.flightsReservation.FirstOrDefault(f => f.myFlightId == idFlight && f.myUserId == id);
+
+            if (flight == null && user == null)
+            {
+                TempData["ErrorMessage"] = "No se cumplen los requisitos";
+                return RedirectToAction("Index");
+            }
+
+
+            double totalCost = flight.flightPrice * sites;
+
+            if (user.credit >= totalCost && flight.soldFlights + sites <= flight.capacity && fr == null)
+            {
+
+                user.credit -= totalCost;
+
+                FlightReservation flightRes = new FlightReservation(flight, user, totalCost, sites);
+
+                user.myFlightBookings.Add(flightRes);
+                user.historyFlightBookings.Add(flight);
+                flight.passengers.Add(user);
+                flight.allFlights.Add(flightRes);
+                flight.soldFlights += sites;
+
+                _context.flights.Update(flight);
+                _context.users.Update(user);
+                _context.flightsReservation.Add(flightRes);
+                await _context.SaveChangesAsync();
+
+                TempData["Message"] = "Reserva realizada con exito";
+                return RedirectToAction(nameof(Index));
+
+            }
+
+            TempData["ErrorMessage"] = "No se cumplen los requisitos";
+            return RedirectToAction("Index");
+
+        }
+
+}
 }

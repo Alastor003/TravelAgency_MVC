@@ -164,6 +164,77 @@ namespace TravelAgency_MVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost, ActionName("Reserve")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Reserve(string idUser, int idHotel, int people, DateTime dSince, DateTime dUntil)
+        {
+            int id = int.Parse(idUser);
+            User user = await _context.users.FindAsync(id);
+            Hotel hotel = await _context.hotel.FindAsync(idHotel);
+
+            if (user == null || hotel == null)
+            {
+                TempData["ErrorMessage"] = "No se cumplen los requisitos";
+                return RedirectToAction("Index");
+            }
+
+            int numberDays = (int)(dUntil - dSince).TotalDays;
+            double totalCost = hotel.Price * people * numberDays;
+
+            var hr = hotel.MyReservations.Where(h => h.Since >= dSince && h.Until <= dUntil);
+            int cantidadTotal = 0;
+            foreach (HotelReservation hrr in hr)
+            {
+                cantidadTotal += hrr.quantity;
+            }
+
+
+
+            if (user.credit >= totalCost && hotel.Capacity >= cantidadTotal + people && dSince < dUntil)
+            {
+                try
+                {
+                    user.credit -= totalCost;
+
+                    HotelReservation hotelRes = new HotelReservation(hotel, user, dSince, dUntil, totalCost);
+
+                    var existe = _context.usersHotels.FirstOrDefault(u => u.idHotel == idHotel && u.idUser == id);
+
+                    if (existe != null)
+                    {
+                        existe.cantidad++;
+                        _context.usersHotels.Update(existe);
+                    }
+                    else
+                    {
+                        user.historyHotelBookings.Add(hotel);
+                        hotel.Hosts.Add(user);
+                    }
+
+
+                    _context.hotelReservations.Add(hotelRes);
+                    user.myHotelBookings.Add(hotelRes);
+                    _context.users.Update(user);
+                    hotel.Capacity -= people;
+                    _context.hotel.Update(hotel);
+
+                    await _context.SaveChangesAsync();
+                    TempData["Message"] = "Reserva realizada con exito";
+
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception e)
+                {
+                    return NotFound(e);
+                }
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "No se cumplen los requisitos";
+                return RedirectToAction("Index");
+            }
+        }
+
         private bool HotelExists(int id)
         {
           return (_context.hotel?.Any(e => e.Id == id)).GetValueOrDefault();
