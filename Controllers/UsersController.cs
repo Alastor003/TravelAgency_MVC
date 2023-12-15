@@ -200,7 +200,7 @@ namespace TravelAgency_MVC.Controllers
             {
                 HttpContext.Session.SetString("UsuarioAutenticado", user.name);
                 HttpContext.Session.SetString("isAdmin", user.isAdmin.ToString());
-                HttpContext.Session.SetString("Id", user.idUser.ToString());
+                HttpContext.Session.SetInt32("Id", user.idUser);
 
 
 
