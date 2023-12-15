@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\source\\repos\\TravelAgency_MVC\\TravelAgency_MVC.csproj": {}
+    "C:\\Users\\Usuario\\Source\\Repos\\TravelAgency_MVC\\TravelAgency_MVC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\source\\repos\\TravelAgency_MVC\\TravelAgency_MVC.csproj": {
+    "C:\\Users\\Usuario\\Source\\Repos\\TravelAgency_MVC\\TravelAgency_MVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\source\\repos\\TravelAgency_MVC\\TravelAgency_MVC.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\Source\\Repos\\TravelAgency_MVC\\TravelAgency_MVC.csproj",
         "projectName": "TravelAgency_MVC",
-        "projectPath": "C:\\Users\\Usuario\\source\\repos\\TravelAgency_MVC\\TravelAgency_MVC.csproj",
+        "projectPath": "C:\\Users\\Usuario\\Source\\Repos\\TravelAgency_MVC\\TravelAgency_MVC.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\source\\repos\\TravelAgency_MVC\\obj\\",
+        "outputPath": "C:\\Users\\Usuario\\Source\\Repos\\TravelAgency_MVC\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -44,23 +44,19 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Microsoft.EntityFrameworkCore.SqlServer": {
+            "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.13, )"
             },
-            "Microsoft.EntityFrameworkCore.Sqlite": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[6.0.23, )"
+              "version": "[7.0.13, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.13, )"
-            },
-            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
-              "target": "Package",
-              "version": "[6.0.16, )"
             }
           },
           "imports": [
