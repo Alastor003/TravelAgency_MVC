@@ -248,6 +248,39 @@ namespace TravelAgency_MVC.Controllers
             }
         }
 
+        // POST: Users/LoadCredit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [TypeFilter(typeof(CustomAuthorizationFilter))]
+        public async Task<IActionResult> LoadCredit(int amount)
+        {
+            var authenticatedUserId = HttpContext.Session.GetString("Id");
+
+            if (string.IsNullOrEmpty(authenticatedUserId))
+            {
+                return RedirectToAction("Login", "Users");
+            }
+
+            if (amount <= 0)
+            {
+                ModelState.AddModelError("amount", "Invalid credit amount.");
+                return RedirectToAction("Profile", "Users");
+            }
+
+            var currentUser = await _context.users.SingleOrDefaultAsync(u => u.idUser.ToString() == authenticatedUserId);
+
+            if (currentUser == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
+
+            currentUser.credit += amount;
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Profile", "Users");
+        }
+
 
 
         public ActionResult Volver()
