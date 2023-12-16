@@ -57,6 +57,8 @@ namespace TravelAgency_MVC.Models
                 user.Property(u => u.credit).IsRequired(true);
                 user.Property(u => u.isAdmin).HasColumnType("bit");
                 user.Property(u => u.isAdmin).IsRequired(true);
+                user.Property(u => u.image).HasColumnType("varchar(200)");
+                user.Property(u => u.image).IsRequired(false);
             });
 
             //Tabla city

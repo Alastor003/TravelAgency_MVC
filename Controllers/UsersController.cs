@@ -373,5 +373,55 @@ namespace TravelAgency_MVC.Controllers
 
             return View(currentUser);
         }
+
+        [HttpPost]
+        public IActionResult UploadImage(IFormFile file, int idUser)
+        {
+            try
+            {
+                if (file == null || file.Length == 0)
+                {
+                    return RedirectToAction("Profile", "Users");
+                }
+
+                var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img");
+
+                if (!Directory.Exists(uploadPath))
+                {
+                    Directory.CreateDirectory(uploadPath);
+                }
+
+                var fileName = Path.GetFileName(file.FileName);
+                var filePath = Path.Combine(uploadPath, fileName);
+
+                var user = _context.users.Find(idUser);
+
+                if (!string.IsNullOrEmpty(user.image))
+                {
+                    var existingFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", user.image.TrimStart('/'));
+                    if (System.IO.File.Exists(existingFilePath))
+                    {
+                        System.IO.File.Delete(existingFilePath);
+                    }
+                }
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+
+                user.image = "/img/" + fileName;
+
+                _context.users.Update(user);
+                _context.SaveChanges();
+
+                return RedirectToAction("Profile", "Users");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al cargar la imagen: {ex.Message}");
+                return RedirectToAction("Profile", "Users");
+            }
+        }
     }
 }
