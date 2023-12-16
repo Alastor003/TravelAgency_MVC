@@ -350,14 +350,24 @@ namespace TravelAgency_MVC.Controllers
         {
 
             // Obtener el nombre del usuario autenticado desde la sesión
-            var authenticatedUserName = HttpContext.Session.GetString("Id");
+            var authenticatedUserId = HttpContext.Session.GetString("Id");
+
+            if (authenticatedUserId == null)
+            {
+
+                return RedirectToAction("Login", "Users");
+            }
 
             // Obtener el usuario actual desde la base de datos
-            var currentUser = await _context.users.SingleOrDefaultAsync(u => u.idUser.ToString() == authenticatedUserName);
+            var currentUser = await _context.users
+                .Include(u => u.myFlightBookings)
+                .Include(u => u.myHotelBookings)
+                .Include(u => u.historyHotelBookings)
+                .Include(u => u.historyFlightBookings)
+                .SingleOrDefaultAsync(u => u.idUser.ToString() == authenticatedUserId);
 
             if (currentUser == null)
             {
-                // Manejar el caso en que no se encuentra el usuario
                 return RedirectToAction("Login", "Users");
             }
 

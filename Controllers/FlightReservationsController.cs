@@ -174,5 +174,9 @@ namespace TravelAgency_MVC.Controllers
         {
           return (_context.flightsReservation?.Any(e => e.id == id)).GetValueOrDefault();
         }
+        public async Task<IActionResult> EditFlights()
+        {
+            return View();
+        }
     }
 }
