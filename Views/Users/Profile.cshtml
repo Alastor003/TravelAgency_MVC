@@ -17,10 +17,8 @@
             <p><strong>Surname:</strong> @Model.surname</p>
             <p><strong>Email:</strong> @Model.email</p>
             <p><strong>Credit:</strong> @Model.credit</p>
-        </div>
 
-        <div class="col-sm-6">
-            <div class="form-group">
+            <div class="form-group mt-3">
                 <form method="post" action="@Url.Action("LoadCredit", "Users")">
                     @Html.AntiForgeryToken()
 
@@ -30,6 +28,29 @@
                     <button type="submit" class="btn btn-success p-2 btn-lg">
                         <i class="fa-regular fa-dollar-sign"></i> Cargar
                     </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            @if (Model.image != null)
+            {
+                <div class="circular-image-container">
+                    <img src="@Url.Content(Model.image)" alt="Perfil" class="imagen-perfil img-fluid rounded-circle" style="width: 250px; height: 250px;" />
+                </div>
+            }
+            else
+            {
+                <div class="circular-image-container">
+                    <img src="~/img/noimage.jpg" alt="Sin imagen" class="imagen-perfil img-fluid rounded-circle" style="width: 250px; height: 250px;" />
+                </div>
+            }
+
+            <div class="mt-2">
+                <form action="@Url.Action("UploadImage", "Users")" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" style="display: none;" id="fileInput" onchange="this.form.submit()" />
+                    <label for="fileInput" class="custom-link">Cargar nueva imagen</label>
+                    <input type="hidden" name="idUser" value="@Model.idUser" />
                 </form>
             </div>
         </div>

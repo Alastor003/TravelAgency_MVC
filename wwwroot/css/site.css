@@ -77,3 +77,14 @@ footer {
 .main-content {
     min-height: 100vh;
 }
+
+.custom-link {
+    cursor: pointer;
+    color: blue;
+    transition: color 0.3s ease;
+    font: bold;
+}
+
+    .custom-link:hover {
+        color: lightblue; 
+    }

@@ -20,6 +20,7 @@ namespace TravelAgency_MVC.Models
         public bool lockedUser { get; set; }
         public double credit { get; set; }
         public bool isAdmin { get; set; }
+        public string image {  get; set; }
         public List<HotelReservation> myHotelBookings { get; set; } = new List<HotelReservation>();
         public List<FlightReservation> myFlightBookings { get; set; } = new List<FlightReservation>();
         public List<Hotel> historyHotelBookings { get; set; } = new List<Hotel>();

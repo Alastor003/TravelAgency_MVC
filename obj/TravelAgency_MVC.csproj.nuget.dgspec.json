@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Facultad\\Travel-3\\TravelAgency_MVC\\TravelAgency_MVC.csproj": {}
+    "C:\\Users\\Brian\\Documents\\c# projects\\TravelAgency_MVC\\TravelAgency_MVC.csproj": {}
   },
   "projects": {
-    "D:\\Facultad\\Travel-3\\TravelAgency_MVC\\TravelAgency_MVC.csproj": {
+    "C:\\Users\\Brian\\Documents\\c# projects\\TravelAgency_MVC\\TravelAgency_MVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Facultad\\Travel-3\\TravelAgency_MVC\\TravelAgency_MVC.csproj",
+        "projectUniqueName": "C:\\Users\\Brian\\Documents\\c# projects\\TravelAgency_MVC\\TravelAgency_MVC.csproj",
         "projectName": "TravelAgency_MVC",
-        "projectPath": "D:\\Facultad\\Travel-3\\TravelAgency_MVC\\TravelAgency_MVC.csproj",
-        "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
-        "outputPath": "D:\\Facultad\\Travel-3\\TravelAgency_MVC\\obj\\",
+        "projectPath": "C:\\Users\\Brian\\Documents\\c# projects\\TravelAgency_MVC\\TravelAgency_MVC.csproj",
+        "packagesPath": "C:\\Users\\Brian\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Brian\\Documents\\c# projects\\TravelAgency_MVC\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\rodri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Brian\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -50,7 +50,7 @@
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[7.0.13, )"
+              "version": "[7.0.14, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
@@ -60,7 +60,7 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.13, )"
+              "version": "[7.0.14, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
@@ -86,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
