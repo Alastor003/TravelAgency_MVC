@@ -61,12 +61,20 @@ namespace TravelAgency_MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,cityName")] City city)
         {
+            bool notRepeat = !_context.cities.Any(c => c.cityName == city.cityName);
+
+            if (!notRepeat)
+            {
+                ModelState.AddModelError("CityName", "El nombre de la ciudad ya está registrado.");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(city);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(city);
         }
 
@@ -149,7 +157,14 @@ namespace TravelAgency_MVC.Controllers
             {
                 return Problem("Entity set 'ApplicationDbContext.cities'  is null.");
             }
+
             var city = await _context.cities.FindAsync(id);
+
+            if (city.flights.Any() || city.hotels.Any())
+            {
+                return Problem("No se puede eliminar la ciudad porque tiene vuelos o hoteles asociados.");
+            }
+
             if (city != null)
             {
                 _context.cities.Remove(city);

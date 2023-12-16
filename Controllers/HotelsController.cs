@@ -157,6 +157,24 @@ namespace TravelAgency_MVC.Controllers
             var hotel = await _context.hotel.FindAsync(id);
             if (hotel != null)
             {
+            List<HotelReservation> hotelReservations = _context.hotelReservations
+                .Where(reserva => reserva.MyHotel.Id == id)
+                .ToList();
+
+            if (hotelReservations.Count != 0)
+            {
+                foreach (HotelReservation hr in hotelReservations)
+                {
+                    if (hr.Until > DateTime.Now)
+                    {
+                        hr.MyUser.DepositCredit(hr.AmountPaid);
+                        hr.MyUser.myHotelBookings.Remove(hr);
+                        _context.users.Update(hr.MyUser);
+                    }
+                }
+                _context.hotelReservations.RemoveRange(hotelReservations);
+            }
+
                 _context.hotel.Remove(hotel);
             }
             

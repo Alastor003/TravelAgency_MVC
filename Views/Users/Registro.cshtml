@@ -13,29 +13,38 @@
     }
 
 </style>
+<div class="mt-5">
+    <h2 class="titulo-centrado mb-3 font-weight-normal">Registro</h2>
 
-<h2 class="titulo-centrado mb-3 font-weight-normal">Registro</h2>
+    <form id="registroForm" class="formulario" method="post" action="@Url.Action("ProcesarRegistro", "Users")">
+        <label for="txtNombre">Nombre</label>
+        <input type="text" id="txtNombre" name="txtNombre" class="form-control mb-2" required>
 
-<form id="registroForm" class="formulario" method="post" action="@Url.Action("ProcesarRegistro", "Users")">
-    <label for="txtNombre">Nombre</label>
-    <input type="text" id="txtNombre" name="txtNombre" class="form-control mb-2" required>
+        <label for="txtApellido">Apellido</label>
+        <input type="text" id="txtApellido" name="txtApellido" class="form-control mb-2" required>
 
-    <label for="txtApellido">Apellido</label>
-    <input type="text" id="txtApellido" name="txtApellido" class="form-control mb-2" required>
+        <label for="txtDni">DNI</label>
+        <input type="number" id="txtDni" name="txtDni" class="form-control mb-2" required>
 
-    <label for="txtDni">DNI</label>
-    <input type="number" id="txtDni" name="txtDni" class="form-control mb-2" required>
+        <label for="txtEmail">Email</label>
+        <input type="email" id="txtEmail" name="txtEmail" class="form-control mb-2" required>
+        <div class="text-danger">@Html.ValidationMessage("txtEmail")</div>
 
-    <label for="txtEmail">Email</label>
-    <input type="email" id="txtEmail" name="txtEmail" class="form-control mb-2" required>
-    <div class="text-danger">@Html.ValidationMessage("txtEmail")</div>
-
-    <label for="txtPassword">Password</label>
-    <input type="password" id="txtPassword" name="txtPassword" class="form-control mb-3" required>
+        <label for="txtPassword">Password</label>
+        <input type="password" id="txtPassword" name="txtPassword" class="form-control mb-3" required>
 
 
-    <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+        <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
 
-    <a class="btn btn-secondary btn-block" href="@Url.Action("Login", "Users")">Volver</a>
-</form>
+        <a class="btn btn-secondary btn-block" href="@Url.Action("Login", "Users")">Volver</a>
+
+        @if (!string.IsNullOrEmpty(ViewBag.Error))
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.Error
+            </div>
+        }
+    </form>
+</div>
+
 

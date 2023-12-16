@@ -64,8 +64,15 @@ namespace TravelAgency_MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,originId,destinationId,soldFlights,capacity,flightPrice,date,airline,aircraft")] Flight flight)
         {
+            var cityOri = _context.cities.FirstOrDefault(cOri => cOri.id == flight.originId);
+            var cityDest = _context.cities.FirstOrDefault(cDest => cDest.id == flight.destinationId);
+
             if (ModelState.IsValid)
             {
+                cityOri.flights.Add(flight);
+                cityDest.flights.Add(flight);
+                _context.cities.Update(cityOri);
+                _context.cities.Update(cityDest);
                 _context.Add(flight);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -104,6 +111,15 @@ namespace TravelAgency_MVC.Controllers
             if (id != flight.id)
             {
                 return NotFound();
+            }
+
+            int solded = _context.flightsReservation
+                  .Where(reserva => reserva.myFlight != null && reserva.myFlight.id == id)
+                  .Sum(reserva => reserva.myFlight.soldFlights);
+
+            if (flight.capacity < solded)
+            {
+                ModelState.AddModelError("capacity", "La capacidad restante no puede ser menor a los boletos vendidos");
             }
 
             if (ModelState.IsValid)
@@ -163,7 +179,17 @@ namespace TravelAgency_MVC.Controllers
             var flight = await _context.flights.FindAsync(id);
             if (flight != null)
             {
+                if (flight.allFlights.Count != 0 && flight.date > DateTime.Now)
+                {
+                    foreach (FlightReservation fr in flight.allFlights)
+                    {
+                        fr.myUser.DepositCredit(fr.amountPaid);
+                        fr.myUser.myFlightBookings.Remove(fr);
+                        _context.users.Update(fr.myUser);
+                    }
+                }
                 _context.flights.Remove(flight);
+                _context.flightsReservation.RemoveRange(flight.allFlights);
             }
             
             await _context.SaveChangesAsync();

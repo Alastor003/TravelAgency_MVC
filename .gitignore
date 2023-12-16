@@ -1,5 +1,7 @@
 ﻿# Visual Studio
 .vs/
+vs/
+obj/
 *.user
 *.suo
 *.cache
@@ -20,84 +22,6 @@
 *.ncb
 *.rsp
 *.scc
-
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# ReSharper
-_ReSharper*/
-*.ReSharper*/
-*.sln.DotSettings.user
-
-# User-specific files
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
-
-# Mono Auto Generated Files
-mono_crash.*
-
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
-
-# Folder config file
-Desktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-# VS Code directories
-.vscode/
-
-# Rider
-.idea/
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
-
-# .NET
-project.lock.json
-project.fragment.lock.json
-artifacts/
-
-# Visual Studio Code
-.vscode/
-*.code-workspace
-
-# User-specific files
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
-
-# Mono Auto Generated Files
-mono_crash.*
-
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
-
-# Folder config file
-Desktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-# JetBrains Rider
-.idea/
-
-# User-specific files
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
+**/.dtbcache.v2
+**/bin/
+**/obj/
