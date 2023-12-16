@@ -239,5 +239,6 @@ namespace TravelAgency_MVC.Controllers
         {
           return (_context.hotel?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+        
     }
 }

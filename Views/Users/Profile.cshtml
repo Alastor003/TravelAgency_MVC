@@ -1,4 +1,5 @@
-﻿@model TravelAgency_MVC.Models.User
+﻿@inject IHttpContextAccessor HttpContextAccessor
+@model TravelAgency_MVC.Models.User
 @{
     ViewData["Title"] = "Profile";
 }
@@ -8,9 +9,8 @@
 <h2>User Profile</h2>
 
 <div class="container">
-    <div class="row">
 
-        <<div class="row">
+        <div class="row">
             <div class="col-sm-6">
                 <p><strong>DNI:</strong> @Model.dni</p>
                 <p><strong>Name:</strong> @Model.name</p>
@@ -34,6 +34,7 @@
                 </div>
             </div>
         </div>
+</div>
 
 
 
@@ -53,16 +54,18 @@
 
                 </tr>
             </thead>
-            <tbody>                                      
+            <tbody>
+                    @foreach (var flightsBooking in Model.myFlightBookings)
+            {
                 <tr>
-                    <td>Brasil</td>
-                    <td>Rodrigo</td>
-                    <td>3</td>
-                    <td>120.000</td>
-                    <td><a href="#">Edit</a></td>
-                    <td><a href="#">Eliminar</a></td>
+                    <td>@Html.DisplayFor(modelItem => flightsBooking.myFlight.aircraft)</td>
+                    <td>@Model.name</td>
+                    <td>@Html.DisplayFor(modelItem => flightsBooking.sites)</td>
+                    <td>@Html.DisplayFor(modelItem => flightsBooking.amountPaid)</td>
+                    <td><a asp-controller="FlightReservations" asp-action="EditFlights">Editar</a></td>
+                    <td><a asp-controller="FlightReservations" asp-action="DeleteFlight">Eliminar</a></td>
                 </tr>
-                
+            }   
             </tbody>
         </table>
     </div>
@@ -80,15 +83,18 @@
                 </tr>
             </thead>
             <tbody>
+                    @foreach (var hotelBooking in Model.myHotelBookings)
+           {                                                      
                 <tr>
-                    <td>Mundial</td>
-                    <td>Rodrigo</td>
-                    <td>4</td>
-                    <td>130.000</td>
-                    <td><a href="#">Edit</a></td>
-                    <td><a href="#">Eliminar</a></td>
+                <td>@Html.DisplayFor(modelItem => hotelBooking.MyHotel.Name)</td>
+                <td>@Model.name</td>
+                <td>@Html.DisplayFor(modelItem => hotelBooking.quantity)</td>
+                <td>@Html.DisplayFor(modelItem => hotelBooking.AmountPaid)</td>
+                <td><a asp-controller="HotelReservations" asp-action="EditHotel">Editar</a> </td>
+                <td><a asp-controller="HotelReservations" asp-action="EliminarHotel">Eliminar</a> </td>
                 </tr>
-            </tbody>
+            }
+        </tbody>
         </table>
     </div>
 
@@ -96,5 +102,6 @@
     </div>
     
 </div>
+        @*<a asp-action="Edit" asp-route-id="@item.idhotelReservation">Edit</a> |*@
 
         

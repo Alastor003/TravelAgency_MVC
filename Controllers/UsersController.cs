@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using TravelAgency_MVC.Models;
 
 namespace TravelAgency_MVC.Controllers
@@ -301,18 +302,30 @@ namespace TravelAgency_MVC.Controllers
         {
 
             // Obtener el nombre del usuario autenticado desde la sesión
-            var authenticatedUserName = HttpContext.Session.GetString("Id");
+            var authenticatedUserId = HttpContext.Session.GetString("Id");
 
-            // Obtener el usuario actual desde la base de datos
-            var currentUser = await _context.users.SingleOrDefaultAsync(u => u.idUser.ToString() == authenticatedUserName);
-
-            if (currentUser == null)
+            if (authenticatedUserId == null)
             {
-                // Manejar el caso en que no se encuentra el usuario
+
                 return RedirectToAction("Login", "Users");
             }
 
+            // Obtener el usuario actual desde la base de datos
+            var currentUser = await _context.users
+                .Include(u => u.myFlightBookings)
+                .Include(u => u.myHotelBookings)
+                .Include(u => u.historyHotelBookings)
+                .Include(u => u.historyFlightBookings)
+                .SingleOrDefaultAsync(u => u.idUser.ToString() == authenticatedUserId);
+
+            if (currentUser == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
+           
             return View(currentUser);
         }
+       
+        
     }
 }
