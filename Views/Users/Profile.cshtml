@@ -1,4 +1,5 @@
-﻿@model TravelAgency_MVC.Models.User
+﻿@inject IHttpContextAccessor HttpContextAccessor
+@model TravelAgency_MVC.Models.User
 @{
     ViewData["Title"] = "Profile";
 }
@@ -8,93 +9,97 @@
 <h2>User Profile</h2>
 
 <div class="container">
+
     <div class="row">
+        <div class="col-sm-6">
+            <p><strong>DNI:</strong> @Model.dni</p>
+            <p><strong>Name:</strong> @Model.name</p>
+            <p><strong>Surname:</strong> @Model.surname</p>
+            <p><strong>Email:</strong> @Model.email</p>
+            <p><strong>Credit:</strong> @Model.credit</p>
+        </div>
 
-        <<div class="row">
-            <div class="col-sm-6">
-                <p><strong>DNI:</strong> @Model.dni</p>
-                <p><strong>Name:</strong> @Model.name</p>
-                <p><strong>Surname:</strong> @Model.surname</p>
-                <p><strong>Email:</strong> @Model.email</p>
-                <p><strong>Credit:</strong> @Model.credit</p>
-            </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <form method="post" action="@Url.Action("LoadCredit", "Users")">
+                    @Html.AntiForgeryToken()
 
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <form method="post" action="@Url.Action("LoadCredit", "Users")">
-                        @Html.AntiForgeryToken()
+                    <label for="amount">Ingrese monto de carga de crédito:</label>
+                    <input type="number" class="form-control my-3" name="amount" required />
 
-                        <label for="amount">Ingrese monto de carga de crédito:</label>
-                        <input type="number" class="form-control my-3" name="amount" required />
-
-                        <button type="submit" class="btn btn-success p-2 btn-lg">
-                            <i class="fa-regular fa-dollar-sign"></i> Cargar
-                        </button>
-                    </form>
-                </div>
+                    <button type="submit" class="btn btn-success p-2 btn-lg">
+                        <i class="fa-regular fa-dollar-sign"></i> Cargar
+                    </button>
+                </form>
             </div>
         </div>
+    </div>
+</div>
 
 
 
 <div class="container">
     <div class="row">
 
-    <div class="col-sm-6">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Vuelos</th>
-                    <th scope="col">Usuario</th>
-                    <th scope="col">Cant.Asientos</th>
-                    <th scope="col">Monto Pago</th>
-                    <th scope="col">Editar</th>
-                    <th scope="col">Eliminar</th>
-
-                </tr>
-            </thead>
-            <tbody>                                      
-                <tr>
-                    <td>Brasil</td>
-                    <td>Rodrigo</td>
-                    <td>3</td>
-                    <td>120.000</td>
-                    <td><a href="#">Edit</a></td>
-                    <td><a href="#">Eliminar</a></td>
-                </tr>
-                
-            </tbody>
-        </table>
-    </div>
         <div class="col-sm-6">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Hoteles</th>
-                    <th scope="col">Usuario</th>
-                    <th scope="col">Cant.Lugares</th>
-                    <th scope="col">Monto Pago</th>
-                    <th scope="col">Editar</th>
-                    <th scope="col">Eliminar</th>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Vuelos</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Cant.Asientos</th>
+                        <th scope="col">Monto Pago</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Eliminar</th>
 
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Mundial</td>
-                    <td>Rodrigo</td>
-                    <td>4</td>
-                    <td>130.000</td>
-                    <td><a href="#">Edit</a></td>
-                    <td><a href="#">Eliminar</a></td>
-                </tr>
-            </tbody>
-        </table>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var flightsBooking in Model.myFlightBookings)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => flightsBooking.myFlight.aircraft)</td>
+                            <td>@Model.name</td>
+                            <td>@Html.DisplayFor(modelItem => flightsBooking.sites)</td>
+                            <td>@Html.DisplayFor(modelItem => flightsBooking.amountPaid)</td>
+                            <td><a asp-controller="FlightReservations" asp-action="EditFlights">Editar</a></td>
+                            <td><a asp-controller="FlightReservations" asp-action="DeleteFlight">Eliminar</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-6">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Hoteles</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Cant.Lugares</th>
+                        <th scope="col">Monto Pago</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Eliminar</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var hotelBooking in Model.myHotelBookings)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => hotelBooking.MyHotel.Name)</td>
+                            <td>@Model.name</td>
+                            <td>@Html.DisplayFor(modelItem => hotelBooking.quantity)</td>
+                            <td>@Html.DisplayFor(modelItem => hotelBooking.AmountPaid)</td>
+                            <td><a asp-controller="HotelReservations" asp-action="EditHotel">Editar</a> </td>
+                            <td><a asp-controller="HotelReservations" asp-action="EliminarHotel">Eliminar</a> </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
     </div>
 
-
-    </div>
-    
 </div>
-
-        
+@*<a asp-action="Edit" asp-route-id="@item.idhotelReservation">Edit</a> |*@
