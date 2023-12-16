@@ -1,8 +1,58 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿    @{
+        @inject IHttpContextAccessor HttpContextAccessor
+        ViewData["Title"] = "Home Page";
+        var mensajeLogin = TempData["LoginExitoso"] as string;
+        var isAdmin = HttpContextAccessor.HttpContext.Session.GetString("isAdmin");
+        var isAdminBool = !string.IsNullOrEmpty(isAdmin) && bool.Parse(isAdmin);
+    }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@if (!string.IsNullOrEmpty(mensajeLogin))
+    {
+        <div class="alert alert-success" role="alert">
+            @mensajeLogin
+        </div>
+    }
+
+<div class="row">
+    <div class="col-12">
+
+    @if (isAdminBool)
+    {
+      <div class="container-index">
+        <div class="welcome-text admin-heading">
+            <h2>Bienvenido al administrador de Travel Agency</h2>
+        </div>
+
+        <div class="motivational-text">
+            <p>Administra los vuelos, hoteles y usuarios!</p>
+            <p>Accede a toda la información en el navegador de arriba</p>
+        </div>
+
+        <div class="image-container">
+            <img src="/img/administracion.jpg" class="img-fluid" alt="Admin">
+        </div>
+
+      </div>
+    }
+    else
+    {
+      <div class="container-index">
+        <div class="welcome-text user-heading">
+            <h2>Bienvenido a Travel Agency</h2>
+            <h3 class="tagline">La mejor experiencia para viajar</h3>
+        </div>
+
+        <div class="motivational-text">
+            <p>¡Descubre el mundo con Travel Agency!</p>
+            <p>Reserva tus vuelos y hoteles para una experiencia inolvidable.</p>
+        </div>
+
+        <div class="image-container">
+            <img src="/img/avion.jpg" class="img-fluid" alt="Avión">
+        </div>
+      </div>
+    }
+
+    </div>
 </div>
+

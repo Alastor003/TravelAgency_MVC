@@ -77,6 +77,14 @@ namespace TravelAgency_MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("idUser,dni,name,surname,email,password,failedTries,lockedUser,credit,isAdmin")] User user)
         {
+            bool notRepeat = !_context.users.Any(u => u.dni == user.dni || u.email == user.email);
+
+            if (!notRepeat) ModelState.AddModelError("", "El DNI o el correo electrónico ya existen.");
+
+            if(user.credit < 0) ModelState.AddModelError("credit", "Solo se aceptan valores igual o mayor a 0.");
+
+            if (user.failedTries < 0) ModelState.AddModelError("failedTries", "Solo se aceptan valores igual o mayor a 0.");
+
             if (ModelState.IsValid)
             {
                 _context.Add(user);
@@ -167,6 +175,12 @@ namespace TravelAgency_MVC.Controllers
             var user = await _context.users.FindAsync(id);
             if (user != null)
             {
+                foreach (FlightReservation fr in user.myFlightBookings.Where(fr => fr.myFlight.date >= DateTime.Now))
+                {
+                    // Agregar logica para remover reservas de vuelo del usuario
+                }
+                //Hoteles y reservas en el futuro.
+
                 _context.users.Remove(user);
             }
             
@@ -193,25 +207,59 @@ namespace TravelAgency_MVC.Controllers
         [HttpPost]
         public ActionResult Login(string txtEmail, string txtPassword)
         {
-            // Verificar las credenciales del usuario
-            var user = _context.users.SingleOrDefault(u => u.email == txtEmail && u.password == txtPassword);
+            string errorMessage;
+            bool loginSuccess = LogIn(txtEmail, txtPassword, out errorMessage);
 
-            if (user != null)
+            if (loginSuccess)
             {
-                HttpContext.Session.SetString("UsuarioAutenticado", user.name);
-                HttpContext.Session.SetString("isAdmin", user.isAdmin.ToString());
-                HttpContext.Session.SetString("Id", user.idUser.ToString());
-
-
-
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                ViewBag.Error = "Credenciales incorrectas";
+                ViewBag.Error = errorMessage;
                 return View();
             }
         }
+
+        public bool LogIn(string email, string password, out string errorMessage)
+        {
+            errorMessage = null;
+            User user = _context.users.FirstOrDefault(u => u.email.Equals(email) && !u.lockedUser);
+
+            if (user != null)
+            {
+                if (user.password.Equals(password))
+                {
+                    HttpContext.Session.SetString("UsuarioAutenticado", user.name);
+                    HttpContext.Session.SetString("isAdmin", user.isAdmin.ToString());
+                    HttpContext.Session.SetString("Id", user.idUser.ToString());
+
+                    TempData["LoginExitoso"] = "Te logueaste con éxito, bienvenido a Travel Agency";
+                    return true;
+                }
+                else
+                {
+                    user.failedTries++;
+                    if (user.failedTries == 3)
+                    {
+                        user.lockedUser = true;
+                        errorMessage = "La cuenta está bloqueada debido a múltiples intentos fallidos.";
+                    }
+                    else
+                    {
+                        errorMessage = "Credenciales incorrectas. Intento fallido número " + user.failedTries;
+                    }
+
+                    _context.users.Update(user);
+                    _context.SaveChanges();
+                    return false;
+                }
+            }
+
+            errorMessage = "Credenciales incorrectas";
+            return false;
+        }
+
         [HttpPost]
         public ActionResult ProcesarRegistro(string txtNombre, string txtApellido, int txtDNI, string txtEmail, string txtPassword)
         {
@@ -237,8 +285,9 @@ namespace TravelAgency_MVC.Controllers
 
                 _context.users.Add(newUser);
                 _context.SaveChanges();
+                // aviso por las dudas, tempdata es para guardar mensajes temporalmente y usarlos en otras partes
+                TempData["MensajeRegistro"] = "Registro exitoso. Ahora puedes iniciar sesión.";
 
-                // Redirigir a la página de inicio de sesión sin establecer la sesión del usuario autenticado
                 return RedirectToAction("Login", "Users");
             }
             catch (Exception ex)
@@ -263,7 +312,7 @@ namespace TravelAgency_MVC.Controllers
 
             if (amount <= 0)
             {
-                ModelState.AddModelError("amount", "Invalid credit amount.");
+                ModelState.AddModelError("amount", "El monto ingresado no puede ser igual o menor a 0.");
                 return RedirectToAction("Profile", "Users");
             }
 
@@ -275,7 +324,7 @@ namespace TravelAgency_MVC.Controllers
             }
 
             currentUser.credit += amount;
-
+            _context.users.Update(currentUser);
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Profile", "Users");
