@@ -222,7 +222,7 @@ namespace TravelAgency_MVC.Controllers
                 {
                     user.credit -= totalCost;
 
-                    HotelReservation hotelRes = new HotelReservation(hotel, user, dSince, dUntil, totalCost);
+                    HotelReservation hotelRes = new HotelReservation(hotel, user, dSince, dUntil, totalCost, people);
 
                     var existe = _context.usersHotels.FirstOrDefault(u => u.idHotel == idHotel && u.idUser == id);
 
