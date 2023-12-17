@@ -327,6 +327,9 @@ namespace TravelAgency_MVC.Controllers
             _context.users.Update(currentUser);
             await _context.SaveChangesAsync();
 
+            TempData["creditoCargado"] = "Se ha cargado exitosamente un monto a tu crédito.";
+
+
             return RedirectToAction("Profile", "Users");
         }
 

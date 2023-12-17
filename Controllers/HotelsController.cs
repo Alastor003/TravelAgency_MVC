@@ -21,10 +21,18 @@ namespace TravelAgency_MVC.Controllers
 
         // GET: Hotels
         [TypeFilter(typeof(CustomAuthorizationFilter))]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchCity)
         {
-            var applicationDbContext = _context.hotel.Include(h => h.Location);
-            return View(await applicationDbContext.ToListAsync());
+            IQueryable<Hotel> hotelsQuery = _context.hotel.Include(h => h.Location);
+
+            if (!string.IsNullOrEmpty(searchCity))
+            {
+                hotelsQuery = hotelsQuery.Where(h => h.Location.cityName.Contains(searchCity));
+            }
+
+            var hotels = await hotelsQuery.ToListAsync();
+
+            return View(hotels);
         }
 
         // GET: Hotels/Details/5
@@ -251,6 +259,15 @@ namespace TravelAgency_MVC.Controllers
                 TempData["ErrorMessage"] = "No se cumplen los requisitos";
                 return RedirectToAction("Index");
             }
+        }
+
+        public List<Hotel> FindHotelsByCity(string searchName)
+        {
+            var matchingHotels = _context.hotel
+                .Where(h => h.Location.cityName.Contains(searchName))
+                .ToList();
+
+            return matchingHotels;
         }
 
         private bool HotelExists(int id)

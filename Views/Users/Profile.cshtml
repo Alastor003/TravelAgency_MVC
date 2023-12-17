@@ -2,6 +2,7 @@
 @model TravelAgency_MVC.Models.User
 @{
     ViewData["Title"] = "Profile";
+    var mensajeCarga = TempData["creditoCargado"] as string;
 }
 <h2>@ViewData["Title"].</h2>
 <h3>@ViewData["Message"]</h3>
@@ -29,6 +30,12 @@
                         <i class="fa-regular fa-dollar-sign"></i> Cargar
                     </button>
                 </form>
+                @if (!string.IsNullOrEmpty(mensajeCarga))
+                {
+                    <div class="alert alert-success mt-1" role="alert">
+                        @mensajeCarga
+                    </div>
+                }
             </div>
         </div>
 
