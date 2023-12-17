@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TravelAgency_MVC.Migrations
 {
     /// <inheritdoc />
-    public partial class inicial : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,7 @@ namespace TravelAgency_MVC.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    cityName = table.Column<string>(type: "varchar(50)", nullable: false)
+                    cityName = table.Column<string>(type: "varchar(50)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -40,7 +40,8 @@ namespace TravelAgency_MVC.Migrations
                     failedTries = table.Column<int>(type: "int", nullable: false),
                     lockedUser = table.Column<bool>(type: "bit", nullable: false),
                     credit = table.Column<double>(type: "float", nullable: false),
-                    isAdmin = table.Column<bool>(type: "bit", nullable: false)
+                    isAdmin = table.Column<bool>(type: "bit", nullable: false),
+                    image = table.Column<string>(type: "varchar(200)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -217,11 +218,11 @@ namespace TravelAgency_MVC.Migrations
 
             migrationBuilder.InsertData(
                 table: "users",
-                columns: new[] { "idUser", "credit", "dni", "email", "failedTries", "isAdmin", "lockedUser", "name", "password", "surname" },
+                columns: new[] { "idUser", "credit", "dni", "email", "failedTries", "image", "isAdmin", "lockedUser", "name", "password", "surname" },
                 values: new object[,]
                 {
-                    { 1, 1000.0, 12345678, "john@gmail.com", 0, false, false, "John", "123", "Doe" },
-                    { 2, 1500.0, 87654321, "admin@admin.com", 0, true, false, "Jane", "admin", "Smith" }
+                    { 1, 1000.0, 12345678, "john@gmail.com", 0, null, false, false, "John", "123", "Doe" },
+                    { 2, 1500.0, 87654321, "admin@admin.com", 0, null, true, false, "Jane", "admin", "Smith" }
                 });
 
             migrationBuilder.InsertData(
@@ -229,8 +230,8 @@ namespace TravelAgency_MVC.Migrations
                 columns: new[] { "id", "aircraft", "airline", "capacity", "date", "destinationId", "flightPrice", "originId", "soldFlights" },
                 values: new object[,]
                 {
-                    { 1, "A380", "Airline1", 150, new DateTime(2024, 1, 2, 15, 7, 37, 356, DateTimeKind.Local).AddTicks(3186), 2, 300.0, 1, 50 },
-                    { 2, "B747", "Airline2", 120, new DateTime(2024, 1, 17, 15, 7, 37, 356, DateTimeKind.Local).AddTicks(3200), 1, 250.0, 2, 30 }
+                    { 1, "A380", "Airline1", 150, new DateTime(2024, 1, 15, 20, 42, 42, 74, DateTimeKind.Local).AddTicks(9721), 2, 300.0, 1, 50 },
+                    { 2, "B747", "Airline2", 120, new DateTime(2024, 1, 30, 20, 42, 42, 74, DateTimeKind.Local).AddTicks(9737), 1, 250.0, 2, 30 }
                 });
 
             migrationBuilder.InsertData(

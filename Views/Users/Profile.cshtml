@@ -68,6 +68,7 @@
                     <tr>
                         <th scope="col">Vuelos</th>
                         <th scope="col">Usuario</th>
+
                         <th scope="col">Cant.Asientos</th>
                         <th scope="col">Monto Pago</th>
                         <th scope="col">Editar</th>
@@ -83,8 +84,8 @@
                             <td>@Model.name</td>
                             <td>@Html.DisplayFor(modelItem => flightsBooking.sites)</td>
                             <td>@Html.DisplayFor(modelItem => flightsBooking.amountPaid)</td>
-                            <td><a asp-controller="FlightReservations" asp-action="EditFlights">Editar</a></td>
-                            <td><a asp-controller="FlightReservations" asp-action="DeleteFlight">Eliminar</a></td>
+                            <td><a asp-controller="FlightReservations" asp-action="EditFlights" asp-route-id="@flightsBooking?.id">Editar</a></td>
+                            <td><a asp-controller="FlightReservations" asp-action="DeleteFlight" asp-route-id="@flightsBooking?.id">Eliminar</a></td>
                         </tr>
                     }
                 </tbody>

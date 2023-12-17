@@ -165,18 +165,156 @@ namespace TravelAgency_MVC.Controllers
             {
                 _context.flightsReservation.Remove(flightReservation);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool FlightReservationExists(int id)
         {
-          return (_context.flightsReservation?.Any(e => e.id == id)).GetValueOrDefault();
+            return (_context.flightsReservation?.Any(e => e.id == id)).GetValueOrDefault();
         }
-        public async Task<IActionResult> EditFlights()
+        public async Task<IActionResult> EditFlights(int? id)
         {
-            return View();
+            if (id == null || _context.flightsReservation == null)
+            {
+                return NotFound();
+            }
+
+            var fl = await _context.flightsReservation
+                .FirstOrDefaultAsync(fl => fl.id == id);
+
+            if (fl == null)
+            {
+                return NotFound();
+            }
+            return View(fl);
+        }
+
+        [HttpPost, ActionName("EditFlights")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditFlights(int id, [Bind("id,myUserId,myFlightId,amountPaid,sites")] FlightReservation fl)
+        {
+            var numberOfSeats = _context.flightsReservation
+                            .Where(fr => fr.id == id)
+                            .Select(fr => fr.sites)
+                            .FirstOrDefault(); 
+
+            var flight = _context.flights.FirstOrDefault(f => f.id == fl.myFlightId);
+            var user = _context.users.FirstOrDefault(u => u.idUser == fl.myUserId);
+
+            if (id != fl.id)
+            {
+                return NotFound();
+            }
+
+            var newSites = numberOfSeats - fl.sites;
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (flight.capacity > flight.soldFlights + newSites)
+                    {
+                        if (user.credit < flight.flightPrice * newSites)
+                        {
+                            TempData["CreditAlert"] = "No tienes suficiente crédito para comprar estos asientos.";
+                            return RedirectToAction("EditFlights", new { id = fl.id });
+                        } else
+                        {
+                            if (newSites > 0)
+                            {
+                                user.credit -= flight.flightPrice * newSites;
+                                fl.amountPaid += flight.flightPrice * newSites;
+                                //DepositCredit(fl.myUserId, -flight.flightPrice * newSites); 
+                            }
+                            else
+                            {
+                                user.credit += flight.flightPrice * newSites;
+                                fl.amountPaid -= flight.flightPrice * newSites;
+                                //DepositCredit(fl.myUserId, (flight.flightPrice * newSites) * -1);
+                            }
+                        }
+
+                        flight.soldFlights += newSites;
+
+                        _context.flightsReservation.Update(fl);
+                        _context.flights.Update(flight);
+                        _context.users.Update(user);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!FlightReservationExists(fl.id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("Profile", "Users");
+            }
+            return View(fl);
+        }
+
+        public async Task<IActionResult> DeleteFlight(int? id)
+        {
+            if (id == null || _context.flightsReservation == null)
+            {
+                return null;
+            }
+
+            var flightReservation = await _context.flightsReservation
+                 .Include(f => f.myFlight)
+                 .Include(f => f.myUser)
+                 .SingleOrDefaultAsync(m => m.id == id);
+
+            if (flightReservation == null)
+            {
+                return NotFound();
+            }
+
+            return View(flightReservation);
+        }
+
+        [HttpPost, ActionName("DeleteFlight")]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> DeleteFlight(int id)
+        {
+            if (_context.flightsReservation == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.flightsReservation'  is null.");
+            }
+            var flightReservation = await _context.flightsReservation.FindAsync(id);
+            var flight = _context.flights.FirstOrDefault(f => f.id == flightReservation.myFlightId);
+            if (flightReservation != null)
+            {
+                if(flight.date > DateTime.Now)
+                {
+                    DepositCredit(flightReservation.myUserId, flightReservation.amountPaid);
+                    flightReservation.myUser.myFlightBookings.Remove(flightReservation);
+                    flight.passengers.Remove(flightReservation.myUser);
+                }
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Profile", "Users");
+        }
+
+        public void DepositCredit(int idUser, double amount)
+        {
+            User user = _context.users.FirstOrDefault(u => u.idUser == idUser);
+
+            if (user != null && amount > 0)
+            {
+                user.credit += amount;
+                _context.users.Update(user);
+                _context.SaveChangesAsync();
+            }
         }
     }
 }

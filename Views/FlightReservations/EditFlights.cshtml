@@ -1,6 +1,76 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model TravelAgency_MVC.Models.FlightReservation
+
 @{
+    ViewData["Title"] = "EditFlights";
 }
-<h1>Llegaste</h1>
+
+@if (TempData["CreditAlert"] != null)
+{
+        <div class="alert alert-danger" role="alert">
+        @TempData["CreditAlert"]
+        </div>
+}
+
+<h1 class="text-center">Edite su vuelo</h1>
+
+<h4>Reserva de vuelo</h4>
+<hr />
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <form asp-action="EditFlights" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="id" />
+
+            <div class="form-group">
+                <input asp-for="id" class="form-control" type="hidden"/>
+                <span asp-validation-for="id" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="myUserId" class="form-control" type="hidden"/>
+                <span asp-validation-for="myUserId" class="text-danger"></span>
+            </div>
+
+             <div class="form-group">
+                <input asp-for="myFlightId" class="form-control" type="hidden"/>
+                <span asp-validation-for="myFlightId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="myFlight" class="form-control" type="hidden"/>
+                <span asp-validation-for="myFlight" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="myUser" class="form-control" type="hidden"/>
+                <span asp-validation-for="myUser" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="amountPaid" class="form-control" type="hidden"/>
+                <span asp-validation-for="amountPaid" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="sites" class="control-label"></label>
+                <input asp-for="sites" class="form-control"/>
+                <span asp-validation-for="sites" class="text-danger"></span>
+            </div>
+
+            <div class="form-group text-center">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="text-center">
+    <a asp-controller="Users" asp-action="Profile">Volver a mi perfil</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

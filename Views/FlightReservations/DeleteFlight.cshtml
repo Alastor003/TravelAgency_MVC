@@ -1,6 +1,52 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model TravelAgency_MVC.Models.FlightReservation
+
 @{
+    ViewData["Title"] = "DeleteFlight";
 }
-<h1>Llegaste</h1>
+
+<h1>Borrar</h1>
+
+<h3>¿Estas seguro que deseas remover esta reserva?</h3>
+<div>
+    <h4>Reserva de vuelo</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Vuelo
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.myFlight.aircraft)
+        </dd>
+        <dt class="col-sm-2">
+            Usuario
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.myUser.email)
+        </dd>
+        <dt class="col-sm-2">
+            Monto pagado
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.amountPaid)
+        </dd>
+        <dt class="col-sm-2">
+            Asientos
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.sites)
+        </dd>
+    </dl>
+
+    <form asp-action="DeleteFlight" method="post">
+        <input type="hidden" asp-for="id" />
+
+        <div class="form-group">
+            <p class="text-danger">Esta accion no puede ser cancelada. ¿Estás seguro que deseas eliminarla?</p>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-danger">Borrar</button>
+            <a asp-controller="Users" asp-action="Profile" class="btn btn-secondary">Volver a mi perfil</a>
+        </div>
+    </form>
+</div>

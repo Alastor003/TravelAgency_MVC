@@ -12,15 +12,15 @@ using TravelAgency_MVC.Models;
 namespace TravelAgency_MVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231203180737_inicial")]
-    partial class inicial
+    [Migration("20231216234242_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.13")
+                .HasAnnotation("ProductVersion", "7.0.14")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -34,7 +34,6 @@ namespace TravelAgency_MVC.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<string>("cityName")
-                        .IsRequired()
                         .HasColumnType("varchar(50)");
 
                     b.HasKey("id");
@@ -103,7 +102,7 @@ namespace TravelAgency_MVC.Migrations
                             aircraft = "A380",
                             airline = "Airline1",
                             capacity = 150,
-                            date = new DateTime(2024, 1, 2, 15, 7, 37, 356, DateTimeKind.Local).AddTicks(3186),
+                            date = new DateTime(2024, 1, 15, 20, 42, 42, 74, DateTimeKind.Local).AddTicks(9721),
                             destinationId = 2,
                             flightPrice = 300.0,
                             originId = 1,
@@ -115,7 +114,7 @@ namespace TravelAgency_MVC.Migrations
                             aircraft = "B747",
                             airline = "Airline2",
                             capacity = 120,
-                            date = new DateTime(2024, 1, 17, 15, 7, 37, 356, DateTimeKind.Local).AddTicks(3200),
+                            date = new DateTime(2024, 1, 30, 20, 42, 42, 74, DateTimeKind.Local).AddTicks(9737),
                             destinationId = 1,
                             flightPrice = 250.0,
                             originId = 2,
@@ -253,6 +252,9 @@ namespace TravelAgency_MVC.Migrations
 
                     b.Property<int>("failedTries")
                         .HasColumnType("int");
+
+                    b.Property<string>("image")
+                        .HasColumnType("varchar(200)");
 
                     b.Property<bool>("isAdmin")
                         .HasColumnType("bit");
