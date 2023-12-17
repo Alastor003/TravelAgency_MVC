@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "p+Tri+dQp66cVQjwwCCFX4a00X0wV1xNbA0MCAXar7I=",
+  "Hash": "o5jGbuHYA3OErn3SWhblScOnQwdT+IB5yFd8B2+vd10=",
   "Source": "TravelAgency_MVC",
   "BasePath": "_content/TravelAgency_MVC",
   "Mode": "Default",
@@ -168,6 +168,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\login.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Brian\\Documents\\c# projects\\TravelAgency_MVC\\wwwroot\\img\\logo.svg",
+      "SourceId": "TravelAgency_MVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Brian\\Documents\\c# projects\\TravelAgency_MVC\\wwwroot\\",
+      "BasePath": "_content/TravelAgency_MVC",
+      "RelativePath": "img/logo.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\logo.svg"
     },
     {
       "Identity": "C:\\Users\\Brian\\Documents\\c# projects\\TravelAgency_MVC\\wwwroot\\img\\noimage.jpg",
@@ -1171,6 +1188,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\Brian\\Documents\\c# projects\\TravelAgency_MVC\\wwwroot\\songs\\cash.wav",
+      "SourceId": "TravelAgency_MVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Brian\\Documents\\c# projects\\TravelAgency_MVC\\wwwroot\\",
+      "BasePath": "_content/TravelAgency_MVC",
+      "RelativePath": "songs/cash.wav",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\songs\\cash.wav"
+    },
+    {
+      "Identity": "C:\\Users\\Brian\\Documents\\c# projects\\TravelAgency_MVC\\wwwroot\\songs\\confirm.wav",
+      "SourceId": "TravelAgency_MVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Brian\\Documents\\c# projects\\TravelAgency_MVC\\wwwroot\\",
+      "BasePath": "_content/TravelAgency_MVC",
+      "RelativePath": "songs/confirm.wav",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\songs\\confirm.wav"
     }
   ]
 }

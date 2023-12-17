@@ -13,10 +13,12 @@ namespace TravelAgency_MVC.Controllers
     public class FlightsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public FlightsController(ApplicationDbContext context)
+        public FlightsController(ApplicationDbContext context, IWebHostEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         // GET: Flights
@@ -191,14 +193,14 @@ namespace TravelAgency_MVC.Controllers
                 _context.flights.Remove(flight);
                 _context.flightsReservation.RemoveRange(flight.allFlights);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool FlightExists(int id)
         {
-          return (_context.flights?.Any(e => e.id == id)).GetValueOrDefault();
+            return (_context.flights?.Any(e => e.id == id)).GetValueOrDefault();
         }
 
         [HttpPost, ActionName("Reserve")]
@@ -237,6 +239,8 @@ namespace TravelAgency_MVC.Controllers
                 _context.flightsReservation.Add(flightRes);
                 await _context.SaveChangesAsync();
 
+                PlaySuccessSound(_hostingEnvironment);
+
                 TempData["Message"] = "Reserva realizada con exito";
                 return RedirectToAction(nameof(Index));
 
@@ -270,6 +274,23 @@ namespace TravelAgency_MVC.Controllers
                 .ToList();
 
             return availableFlights;
+        }
+
+        private void PlaySuccessSound(IWebHostEnvironment hostingEnvironment)
+        {
+            string soundFilePath = "/songs/confirm.wav";
+
+            var webRoot = hostingEnvironment.WebRootPath;
+            var fileInfo = hostingEnvironment.WebRootFileProvider.GetFileInfo(soundFilePath);
+            var physicalPath = fileInfo.PhysicalPath;
+
+            if (System.IO.File.Exists(physicalPath))
+            {
+                using (var soundPlayer = new System.Media.SoundPlayer(physicalPath))
+                {
+                    soundPlayer.Play();
+                }
+            }
         }
 
     }

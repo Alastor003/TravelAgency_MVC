@@ -33,6 +33,10 @@
       "PackagePath": "staticwebassets\\img\\login.jpg"
     },
     {
+      "Id": "C:\\Users\\Brian\\Documents\\c# projects\\TravelAgency_MVC\\wwwroot\\img\\logo.svg",
+      "PackagePath": "staticwebassets\\img\\logo.svg"
+    },
+    {
       "Id": "C:\\Users\\Brian\\Documents\\c# projects\\TravelAgency_MVC\\wwwroot\\img\\noimage.jpg",
       "PackagePath": "staticwebassets\\img\\noimage.jpg"
     },
@@ -267,6 +271,14 @@
     {
       "Id": "C:\\Users\\Brian\\Documents\\c# projects\\TravelAgency_MVC\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\Brian\\Documents\\c# projects\\TravelAgency_MVC\\wwwroot\\songs\\cash.wav",
+      "PackagePath": "staticwebassets\\songs\\cash.wav"
+    },
+    {
+      "Id": "C:\\Users\\Brian\\Documents\\c# projects\\TravelAgency_MVC\\wwwroot\\songs\\confirm.wav",
+      "PackagePath": "staticwebassets\\songs\\confirm.wav"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.TravelAgency_MVC.Microsoft.AspNetCore.StaticWebAssets.props",
