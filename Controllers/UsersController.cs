@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting.Internal;
 using TravelAgency_MVC.Models;
 
 namespace TravelAgency_MVC.Controllers
@@ -15,11 +16,13 @@ namespace TravelAgency_MVC.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public UsersController(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
+        public UsersController(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment hostingEnvironment)
         {
             _context = context;
             _httpContextAccessor = httpContextAccessor;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public class CustomAuthorizationFilter : IAuthorizationFilter
@@ -327,6 +330,8 @@ namespace TravelAgency_MVC.Controllers
             _context.users.Update(currentUser);
             await _context.SaveChangesAsync();
 
+            PlaySuccessSound(_hostingEnvironment);
+
             TempData["creditoCargado"] = "Se ha cargado exitosamente un monto a tu crédito.";
 
 
@@ -424,6 +429,23 @@ namespace TravelAgency_MVC.Controllers
             {
                 Console.WriteLine($"Error al cargar la imagen: {ex.Message}");
                 return RedirectToAction("Profile", "Users");
+            }
+        }
+
+        private void PlaySuccessSound(IWebHostEnvironment hostingEnvironment)
+        {
+            string soundFilePath = "/songs/cash.wav";
+
+            var webRoot = hostingEnvironment.WebRootPath;
+            var fileInfo = hostingEnvironment.WebRootFileProvider.GetFileInfo(soundFilePath);
+            var physicalPath = fileInfo.PhysicalPath;
+
+            if (System.IO.File.Exists(physicalPath))
+            {
+                using (var soundPlayer = new System.Media.SoundPlayer(physicalPath))
+                {
+                    soundPlayer.Play();
+                }
             }
         }
     }

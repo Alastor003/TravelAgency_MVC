@@ -5,16 +5,22 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 @if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("UsuarioAutenticado")))
 {
     var isAdmin = HttpContextAccessor.HttpContext.Session.GetString("isAdmin");
     var isAdminBool = !string.IsNullOrEmpty(isAdmin) && bool.Parse(isAdmin);
     @if (isAdminBool)
     {
+        <h1 class="styled-title">Administracion de hoteles</h1>
+        <hr />
         <p>
             <a asp-action="Create">Create New</a>
         </p>
+    }
+    else
+    {
+        <h1 class="styled-title">Reserva de hoteles</h1>
+        <hr />
     }
     @if (TempData["ErrorMessage"] != null)
     {

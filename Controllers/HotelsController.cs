@@ -13,10 +13,12 @@ namespace TravelAgency_MVC.Controllers
     public class HotelsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public HotelsController(ApplicationDbContext context)
+        public HotelsController(ApplicationDbContext context, IWebHostEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         // GET: Hotels
@@ -244,6 +246,8 @@ namespace TravelAgency_MVC.Controllers
                     hotel.Capacity -= people;
                     _context.hotel.Update(hotel);
 
+                    PlaySuccessSound(_hostingEnvironment);
+
                     await _context.SaveChangesAsync();
                     TempData["Message"] = "Reserva realizada con exito";
 
@@ -273,6 +277,23 @@ namespace TravelAgency_MVC.Controllers
         private bool HotelExists(int id)
         {
           return (_context.hotel?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        private void PlaySuccessSound(IWebHostEnvironment hostingEnvironment)
+        {
+            string soundFilePath = "/songs/confirm.wav";
+
+            var webRoot = hostingEnvironment.WebRootPath;
+            var fileInfo = hostingEnvironment.WebRootFileProvider.GetFileInfo(soundFilePath);
+            var physicalPath = fileInfo.PhysicalPath;
+
+            if (System.IO.File.Exists(physicalPath))
+            {
+                using (var soundPlayer = new System.Media.SoundPlayer(physicalPath))
+                {
+                    soundPlayer.Play();
+                }
+            }
         }
     }
 }

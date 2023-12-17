@@ -88,3 +88,10 @@ footer {
 .custom-link:hover {
     color: lightblue; 
 }
+
+.styled-title {
+    color: #007BFF;
+    text-align: center;
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 10px;
+}
