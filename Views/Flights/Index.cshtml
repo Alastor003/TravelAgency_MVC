@@ -31,7 +31,26 @@
             <p>@TempData["Message"]</p>
         </div>
     }
-    <table class="table">
+    @if (!isAdminBool)
+    {
+        <div>
+            <form method="get" asp-action="Search">
+                <label for="searchCity">Destino:</label>
+                <input type="text" id="searchCity" name="searchCity" />
+
+                <label for="startDate">Fecha de inicio:</label>
+                <input type="date" id="startDate" name="startDate" />
+
+                <label for="endDate">Fecha de fin:</label>
+                <input type="date" id="endDate" name="endDate" />
+
+                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i> Buscar Vuelos</button>
+            </form>
+        </div>
+    }
+
+
+    <table class="table mt-3">
         <thead>
             <tr>
                 <th>

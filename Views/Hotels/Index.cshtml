@@ -94,7 +94,7 @@
                                 @Html.AntiForgeryToken()
                             <input type="hidden" name="idHotel" value="@item.Id" />
                             <input type="hidden" name="idUser" value="@HttpContextAccessor.HttpContext.Session.GetString("Id")" />
-                            <label for="sites">Asientos:</label>
+                            <label for="sites">Lugares:</label>
                             <input type="number" name="people" value="1" min="1" max="10" />
                             <button class="btn btn-primary" type="submit"><i class="fa-solid fa-hotel"></i> Reservar Hotel</button>
 

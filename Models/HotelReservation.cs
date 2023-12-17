@@ -29,13 +29,14 @@ namespace TravelAgency_MVC.Models
             Until = until;
         }
 
-        public HotelReservation(Hotel myHotel, User myUser, DateTime since, DateTime until, double amountPaid)
+        public HotelReservation(Hotel myHotel, User myUser, DateTime since, DateTime until, double amountPaid, int people)
         {
             MyHotel = myHotel;
             MyUser = myUser;
             Since = since;
             Until = until;
             AmountPaid = amountPaid;
+            quantity = people;
         }
         public HotelReservation(int id, Hotel myHotel, User myUser, DateTime since, DateTime until, double amountPaid)
         {

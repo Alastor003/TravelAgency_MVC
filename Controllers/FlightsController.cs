@@ -247,5 +247,30 @@ namespace TravelAgency_MVC.Controllers
 
         }
 
-}
+        [TypeFilter(typeof(CustomAuthorizationFilter))]
+        public async Task<IActionResult> Search(string searchCity, DateTime? startDate, DateTime? endDate)
+        {
+            if (!string.IsNullOrEmpty(searchCity) && startDate.HasValue && endDate.HasValue)
+            {
+                var searchResults = SearchFlights(searchCity, startDate.Value, endDate.Value);
+                return View("Index", searchResults);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public List<Flight> SearchFlights(string searchCity, DateTime startDate, DateTime endDate)
+        {
+            var availableFlights = _context.flights
+                .Where(f =>
+                    f.destination.cityName.Contains(searchCity) &&
+                    f.date.Date >= startDate.Date &&
+                    f.date.Date <= endDate.Date &&
+                    f.capacity > f.passengers.Count)
+                .ToList();
+
+            return availableFlights;
+        }
+
+    }
 }
