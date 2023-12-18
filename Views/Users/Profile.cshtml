@@ -102,7 +102,7 @@
                             <td>@Model.name</td>
                             <td>@Html.DisplayFor(modelItem => flightsBooking.sites)</td>
                             <td>@Html.DisplayFor(modelItem => flightsBooking.amountPaid)</td>
-                            <td><a asp-controller="FlightReservations" asp-action="DetailsFlight" asp-route-id="@flightsBooking.id">Editar</a></td>
+                            <td><a asp-controller="FlightReservations" asp-action="EditFlightUser" asp-route-id="@flightsBooking.id">Editar</a></td>
                             <td><a asp-controller="FlightReservations" asp-action="DeleteFlight">Eliminar</a></td>
                         </tr>
                     }
@@ -131,7 +131,7 @@
                             <td>@Html.DisplayFor(modelItem => hotelBooking.quantity)</td>
                             <td>@Html.DisplayFor(modelItem => hotelBooking.AmountPaid)</td>
                             <td><a asp-controller="HotelReservations" asp-action="EditHotelUser" asp-route-id="@hotelBooking.ID">Editar</a> </td>
-                            <td><a asp-controller="HotelReservations" asp-action="EliminarHotel">Eliminar</a> </td>
+                            <td><a asp-controller="HotelReservations" asp-action="DeleteHotelUser" asp-route-id="@hotelBooking.ID">Eliminar</a> </td>
                         </tr>
                     }
                 </tbody>

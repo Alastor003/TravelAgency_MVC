@@ -174,9 +174,91 @@ namespace TravelAgency_MVC.Controllers
         {
           return (_context.flightsReservation?.Any(e => e.id == id)).GetValueOrDefault();
         }
-        public async Task<IActionResult> EditFlights()
+
+        [TypeFilter(typeof(CustomAuthorizationFilter))]
+        public async Task<IActionResult> EditFlightUser(int? id)
         {
-            return View();
+            if (id == null || _context.flightsReservation == null)
+            {
+                return NotFound();
+            }
+
+            var flightReservation = await _context.flightsReservation.FindAsync(id);
+            if (flightReservation == null)
+            {
+                return NotFound();
+            }
+            ViewData["myFlightId"] = new SelectList(_context.flights, "id", "aircraft", flightReservation.myFlightId);
+            ViewData["myUserId"] = new SelectList(_context.users, "idUser", "email", flightReservation.myUserId);
+            return View(flightReservation);
         }
+
+
+        // POST: FlightReservations/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditFlightUser(int id, [Bind("id,myUserId,myFlightId,amountPaid,sites")] FlightReservation flightReservation)
+        {
+
+            var bdact = _context.flightsReservation.Include(fr => fr.myUser).Include(fr => fr.myFlight);
+
+            FlightReservation actual = bdact.FirstOrDefault(f => f.id == id);
+
+
+
+            if (id != flightReservation.id)
+            {
+                TempData["ErrorEnModificacion"] = "No se pudo modificar la reserva";
+                return RedirectToAction("Index");
+            }
+            if (ModelState.IsValid)
+            {
+                int newSites = flightReservation.sites - actual.sites;
+                double costoCambiar = newSites * actual.myFlight.flightPrice;
+
+                if (actual.myUser.credit >= costoCambiar && actual.myFlight.capacity >= actual.myFlight.soldFlights + newSites && flightReservation.sites > 0)
+                {
+                    try
+                    {
+                        actual.myUser.credit -= costoCambiar;
+                        actual.sites = flightReservation.sites;
+                        actual.amountPaid = actual.myFlight.flightPrice * flightReservation.sites;
+                        actual.myFlight.soldFlights += newSites;
+
+                        _context.flightsReservation.Update(actual);
+                        _context.users.Update(actual.myUser);
+                        _context.flights.Update(actual.myFlight);
+
+                        await _context.SaveChangesAsync();
+                        TempData["ReservaModificada"] = "Su reserva fue modificada con exito";
+
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!FlightReservationExists(flightReservation.id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+
+                }
+                else
+                {
+                    TempData["ErrorEnModificacion"] = "No se pudo modificar la reserva";
+                    return RedirectToAction("Profile", "Users");
+                }
+                return RedirectToAction("Profile", "Users");
+
+            }
+            TempData["ErrorEnModificacion"] = "No se pudo modificar la reserva";
+            return RedirectToAction("Profile", "Users");
+
+        }
+
+
     }
 }
