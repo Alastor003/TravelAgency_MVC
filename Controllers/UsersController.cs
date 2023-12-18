@@ -180,9 +180,14 @@ namespace TravelAgency_MVC.Controllers
             {
                 foreach (FlightReservation fr in user.myFlightBookings.Where(fr => fr.myFlight.date >= DateTime.Now))
                 {
-                    // Agregar logica para remover reservas de vuelo del usuario
+                    _context.flightsReservation.Remove(fr);
                 }
-                //Hoteles y reservas en el futuro.
+
+                foreach (HotelReservation hr in user.myHotelBookings.Where(hr => hr.Since >= DateTime.Now))
+                {
+                    _context.hotelReservations.Remove(hr);
+                }
+
 
                 _context.users.Remove(user);
             }
