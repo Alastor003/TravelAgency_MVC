@@ -56,8 +56,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0UmVzZXJ2YXRpb25zXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/FlightReservations/EditFlights.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0UmVzZXJ2YXRpb25zXEVkaXRGbGlnaHRzLmNzaHRtbA==
+[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/FlightReservations/EditFlightUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpZ2h0UmVzZXJ2YXRpb25zXEVkaXRGbGlnaHRVc2VyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/FlightReservations/Index.cshtml]
@@ -100,8 +100,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG90ZWxSZXNlcnZhdGlvbnNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/HotelReservations/DeleteHotel.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG90ZWxSZXNlcnZhdGlvbnNcRGVsZXRlSG90ZWwuY3NodG1s
+[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/HotelReservations/DeleteHotelUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG90ZWxSZXNlcnZhdGlvbnNcRGVsZXRlSG90ZWxVc2VyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/HotelReservations/Details.cshtml]
@@ -112,8 +112,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG90ZWxSZXNlcnZhdGlvbnNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/HotelReservations/EditHotel.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG90ZWxSZXNlcnZhdGlvbnNcRWRpdEhvdGVsLmNzaHRtbA==
+[C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/HotelReservations/EditHotelUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG90ZWxSZXNlcnZhdGlvbnNcRWRpdEhvdGVsVXNlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Brian/Documents/c\# projects/TravelAgency_MVC/Views/HotelReservations/Index.cshtml]
