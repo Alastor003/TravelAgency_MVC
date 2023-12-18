@@ -1,0 +1,61 @@
+﻿@model TravelAgency_MVC.Models.HotelReservation
+
+@{
+    ViewData["Title"] = "EditHotelUser";
+}
+
+<h1>Edit</h1>
+
+<h4>HotelReservation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditHotelUser">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="myHotelId" class="control-label"></label>
+                <input asp-for="myHotelId" class="form-control" asp-items="ViewBag.myHotelId" readonly></input>
+                <span asp-validation-for="myHotelId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="myUserId" class="control-label"></label>
+                <input asp-for="myUserId" class="form-control" asp-items="ViewBag.myUserId" readonly></input>
+                <span asp-validation-for="myUserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Since" class="control-label"></label>
+                <input asp-for="Since" class="form-control" />
+                <span asp-validation-for="Since" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Until" class="control-label"></label>
+                <input asp-for="Until" class="form-control" />
+                <span asp-validation-for="Until" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AmountPaid" class="control-label"></label>
+                <input asp-for="AmountPaid" class="form-control" readonly />
+                <span asp-validation-for="AmountPaid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="quantity" class="control-label"></label>
+                <input asp-for="quantity" class="form-control" />
+                <span asp-validation-for="quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Users" asp-action="Profile">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

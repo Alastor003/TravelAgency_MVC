@@ -36,6 +36,18 @@
                         @mensajeCarga
                     </div>
                 }
+                else if (TempData["ErrorEnModificacion"] != null)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        <p>@TempData["ErrorEnModificacion"]</p>
+                    </div>
+                }
+                else if (TempData["ReservaModificada"] != null)
+                {
+                    <div class="alert alert-success" role="alert">
+                        <p>@TempData["ReservaModificada"]</p>
+                    </div>
+                }
             </div>
         </div>
 
@@ -90,7 +102,7 @@
                             <td>@Model.name</td>
                             <td>@Html.DisplayFor(modelItem => flightsBooking.sites)</td>
                             <td>@Html.DisplayFor(modelItem => flightsBooking.amountPaid)</td>
-                            <td><a asp-controller="FlightReservations" asp-action="EditFlights">Editar</a></td>
+                            <td><a asp-controller="FlightReservations" asp-action="DetailsFlight" asp-route-id="@flightsBooking.id">Editar</a></td>
                             <td><a asp-controller="FlightReservations" asp-action="DeleteFlight">Eliminar</a></td>
                         </tr>
                     }
@@ -118,7 +130,7 @@
                             <td>@Model.name</td>
                             <td>@Html.DisplayFor(modelItem => hotelBooking.quantity)</td>
                             <td>@Html.DisplayFor(modelItem => hotelBooking.AmountPaid)</td>
-                            <td><a asp-controller="HotelReservations" asp-action="EditHotel">Editar</a> </td>
+                            <td><a asp-controller="HotelReservations" asp-action="EditHotelUser" asp-route-id="@hotelBooking.ID">Editar</a> </td>
                             <td><a asp-controller="HotelReservations" asp-action="EliminarHotel">Eliminar</a> </td>
                         </tr>
                     }
@@ -130,4 +142,3 @@
     </div>
 
 </div>
-@*<a asp-action="Edit" asp-route-id="@item.idhotelReservation">Edit</a> |*@
