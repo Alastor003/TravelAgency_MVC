@@ -259,6 +259,55 @@ namespace TravelAgency_MVC.Controllers
 
         }
 
+        public async Task<IActionResult> DeleteFlight(int? id)
+        {
+            if (id == null || _context.flightsReservation == null)
+            {
+                return null;
+            }
+
+            var flightReservation = await _context.flightsReservation
+                 .Include(f => f.myFlight)
+                 .Include(f => f.myUser)
+                 .SingleOrDefaultAsync(m => m.id == id);
+
+            if (flightReservation == null)
+            {
+                return NotFound();
+            }
+
+            return View(flightReservation);
+        }
+
+        [HttpPost, ActionName("DeleteFlight")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteFlight(int id)
+        {
+            if (_context.flightsReservation == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.flightsReservation'  is null.");
+            }
+            var flightReservation = await _context.flightsReservation
+                .Include(f => f.myFlight).Include(f => f.myFlight.passengers)
+                .Include(f => f.myUser)
+                .FirstOrDefaultAsync(m => m.id == id);
+
+            if (flightReservation != null)
+            {
+                if (flightReservation.myFlight.date > DateTime.Now)
+                {
+                    flightReservation.myUser.credit += flightReservation.amountPaid; 
+                    flightReservation.myUser.myFlightBookings.Remove(flightReservation);
+                    flightReservation.myFlight.passengers.Remove(flightReservation.myUser);
+                    flightReservation.myFlight.soldFlights -= flightReservation.sites;
+                    
+                }
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Profile", "Users");
+        }
+
 
     }
 }
