@@ -176,10 +176,6 @@ namespace TravelAgency_MVC.Controllers
         {
             return (_context.hotelReservations?.Any(e => e.ID == id)).GetValueOrDefault();
         }
-        public async Task<IActionResult> EditHotel()
-        {
-            return View();
-        }
 
 
         [TypeFilter(typeof(CustomAuthorizationFilter))]
@@ -285,6 +281,71 @@ namespace TravelAgency_MVC.Controllers
 
             }
             TempData["ErrorEnModificacion"] = "No se pudo modificar la reserva";
+            return RedirectToAction("Profile", "Users");
+
+        }
+
+        // GET: HotelReservations/Delete/5
+        public async Task<IActionResult> DeleteHotelUser(int? id)
+        {
+            if (id == null || _context.hotelReservations == null)
+            {
+                return NotFound();
+            }
+
+            var hotelReservation = await _context.hotelReservations
+                .Include(h => h.MyHotel)
+                .Include(h => h.MyUser)
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (hotelReservation == null)
+            {
+                return NotFound();
+            }
+
+            return View(hotelReservation);
+        }
+
+        // POST: HotelReservations/Delete/5
+        [HttpPost, ActionName("DeleteHotelUser")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmedHotelUser(int id)
+        {
+            if (_context.hotelReservations == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.hotelReservations'  is null.");
+            }
+            var hotelReservation = await _context.hotelReservations
+               .Include(h => h.MyHotel)
+               .Include(h => h.MyUser)
+               .FirstOrDefaultAsync(m => m.ID == id);
+            if (hotelReservation != null)
+            {
+                if (hotelReservation.Since > DateTime.Now)
+                {
+
+                    hotelReservation.MyUser.credit += hotelReservation.AmountPaid;
+
+
+                    var existe = _context.usersHotels.FirstOrDefault(u => u.idHotel == hotelReservation.myHotelId && u.idUser == hotelReservation.myUserId);
+
+                    if (existe.cantidad == 0)
+                    {
+                        _context.usersHotels.Remove(existe);
+                        hotelReservation.MyUser.myHotelBookings.Remove(hotelReservation);
+                        hotelReservation.MyHotel.Hosts.Remove(hotelReservation.MyUser);
+                    }
+                    else
+                    {
+                        existe.cantidad -= 1;
+                    }
+                    _context.usersHotels.Update(existe);
+                    _context.hotelReservations.Remove(hotelReservation);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Profile", "Users");
+                }
+
+
+            }
             return RedirectToAction("Profile", "Users");
 
         }

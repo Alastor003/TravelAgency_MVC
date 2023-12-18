@@ -167,27 +167,27 @@ namespace TravelAgency_MVC.Controllers
             var hotel = await _context.hotel.FindAsync(id);
             if (hotel != null)
             {
-            List<HotelReservation> hotelReservations = _context.hotelReservations
-                .Where(reserva => reserva.MyHotel.Id == id)
-                .ToList();
+                List<HotelReservation> hotelReservations = _context.hotelReservations
+                    .Where(reserva => reserva.MyHotel.Id == id)
+                    .ToList();
 
-            if (hotelReservations.Count != 0)
-            {
-                foreach (HotelReservation hr in hotelReservations)
+                if (hotelReservations.Count != 0)
                 {
-                    if (hr.Until > DateTime.Now)
+                    foreach (HotelReservation hr in hotelReservations)
                     {
-                        hr.MyUser.DepositCredit(hr.AmountPaid);
-                        hr.MyUser.myHotelBookings.Remove(hr);
-                        _context.users.Update(hr.MyUser);
+                        if (hr.Until > DateTime.Now)
+                        {
+                            hr.MyUser.DepositCredit(hr.AmountPaid);
+                            hr.MyUser.myHotelBookings.Remove(hr);
+                            _context.users.Update(hr.MyUser);
+                        }
                     }
+                    _context.hotelReservations.RemoveRange(hotelReservations);
                 }
-                _context.hotelReservations.RemoveRange(hotelReservations);
-            }
 
                 _context.hotel.Remove(hotel);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -237,16 +237,17 @@ namespace TravelAgency_MVC.Controllers
                     {
                         user.historyHotelBookings.Add(hotel);
                         hotel.Hosts.Add(user);
+
                     }
 
 
                     _context.hotelReservations.Add(hotelRes);
                     user.myHotelBookings.Add(hotelRes);
                     _context.users.Update(user);
-                    hotel.Capacity -= people;
                     _context.hotel.Update(hotel);
 
                     PlaySuccessSound(_hostingEnvironment);
+
 
                     await _context.SaveChangesAsync();
                     TempData["Message"] = "Reserva realizada con exito";
@@ -276,7 +277,7 @@ namespace TravelAgency_MVC.Controllers
 
         private bool HotelExists(int id)
         {
-          return (_context.hotel?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.hotel?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
         private void PlaySuccessSound(IWebHostEnvironment hostingEnvironment)

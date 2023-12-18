@@ -131,7 +131,7 @@
                             <td>@Html.DisplayFor(modelItem => hotelBooking.quantity)</td>
                             <td>@Html.DisplayFor(modelItem => hotelBooking.AmountPaid)</td>
                             <td><a asp-controller="HotelReservations" asp-action="EditHotelUser" asp-route-id="@hotelBooking.ID">Editar</a> </td>
-                            <td><a asp-controller="HotelReservations" asp-action="EliminarHotel">Eliminar</a> </td>
+                            <td><a asp-controller="HotelReservations" asp-action="DeleteHotelUser" asp-route-id="@hotelBooking.ID">Eliminar</a> </td>
                         </tr>
                     }
                 </tbody>
